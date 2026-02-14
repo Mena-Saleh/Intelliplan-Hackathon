@@ -3,23 +3,16 @@
 :root {
   /* Brand Colors */
   --color-brand-primary: #0098C3;
-  /* Light blue */
   --color-brand-accent: #EC7A08;
-  /* Orange CTA */
   --color-brand-dark: #002F5F;
-  /* Navy */
-
+  
   /* Surfaces */
   --color-bg-page: #F2F7FC;
-  /* Page background */
   --color-bg-surface: #FFFFFF;
-  /* Cards / panels */
 
   /* Text */
   --color-text-primary: #002F5F;
-  /* Headings */
-  --color-text-body: #171717;
-  /* Body text */
+  --color-text-body: #171717; 
 
   /* Fonts */
   --font-heading: "Raleway", sans-serif;
