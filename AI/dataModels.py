@@ -2,7 +2,6 @@ from typing import List, Dict, Literal
 from pydantic import BaseModel
 from datetime import date, time
 
-
 class TimeSlot(BaseModel):
     start: time
     end: time
