@@ -1,5 +1,5 @@
 from datetime import date, time
-from dataModels import (
+from models import (
     Consultant,
     Availability,
     TimeSlot,

@@ -36,3 +36,14 @@ class Booking(BaseModel):
     consultant_id: str
     staffing_need_id: str
     status: Literal["suggested", "requested", "approved", "confirmed"]
+
+class RiskAssessment(BaseModel):
+    level: Literal["LOW", "MEDIUM", "HIGH"]
+    competence_similarity: float
+    experience_similarity: float
+    reason: str
+
+class Recommendation(BaseModel):
+    consultant: Consultant
+    score: float
+    risk: RiskAssessment

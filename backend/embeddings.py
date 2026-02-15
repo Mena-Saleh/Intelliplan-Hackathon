@@ -14,7 +14,6 @@ def get_embeddings(sentence: str) -> np.ndarray:
 
     return embedding
 
-
 def get_cosine_similarity(vec1: np.ndarray, vec2: np.ndarray, is_normalized=True) -> float:
     dot_product = np.dot(vec1, vec2)
 
