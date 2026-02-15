@@ -1,8 +1,11 @@
 import processing as p
-from datetime import datetime
+from dataModels import (
+    Consultant,
+    StaffingNeed,
+)
 
 
-def filterByAvailability(consultants, staffingNeed):
+def filterByAvailability(consultants : list[Consultant], staffingNeed : StaffingNeed):
     available_consultants = []
 
     weekday = staffingNeed.date.strftime("%A")
@@ -22,7 +25,8 @@ def filterByAvailability(consultants, staffingNeed):
     return available_consultants
 
 
-def filterByCompetencesAndExperience(consultants, staffingNeed):
+def filterByCompetencesAndExperience(consultants: list[Consultant], staffingNeed: StaffingNeed):
+
     ranked = []
 
     need_text = " ".join(staffingNeed.required_competences)
@@ -30,19 +34,32 @@ def filterByCompetencesAndExperience(consultants, staffingNeed):
 
     for consultant in consultants:
 
-        consultant_text = " ".join(
-            consultant.competences + consultant.customer_experience
-        )
+        competence_text = " ".join(consultant.competences)
+        competence_embedding = p.get_embeddings(competence_text)
 
-        consultant_embedding = p.get_embeddings(consultant_text)
-
-        similarity = p.get_cosine_similarity(
+        competence_similarity = p.get_cosine_similarity(
             need_embedding,
-            consultant_embedding
+            competence_embedding
         )
 
-        ranked.append((consultant, similarity))
+        experience_text = " ".join(consultant.customer_experience)
+        experience_embedding = p.get_embeddings(experience_text)
 
-    ranked.sort(key=lambda x: (x[1], x[0].rating), reverse=True)
+        experience_similarity = p.get_cosine_similarity(
+            need_embedding,
+            experience_embedding
+        )
+
+        normalized_rating = consultant.rating / 5.0
+
+        final_score = (
+            0.65 * competence_similarity +
+            0.25 * experience_similarity +
+            0.10 * normalized_rating
+        )
+
+        ranked.append((consultant, final_score))
+
+    ranked.sort(key=lambda x: x[1], reverse=True)
 
     return ranked
