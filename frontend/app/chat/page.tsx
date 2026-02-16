@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import Sidebar from "@/src/components/sidebar";
-import { MessageSquare, Send } from "lucide-react";
 import { Chat } from "@/src/models/Chat";
 import { MOCK_CHAT_DATA } from "@/src/data/mockChatData";
 import ChatWelcome from "@/src/components/chatWelcome";
+import ChatInput from "@/src/components/chatInput";
 
 
 
@@ -68,8 +68,6 @@ export default function ChatPage() {
 			<main className="ml-80 flex-1 flex flex-col">
 				{/* EMPTY STATE */}
 				{!activeChat ? (
-
-					// TODO: Move into component Chat Welcome
 					<ChatWelcome onNewChat={createNewChat} />
 				) : (
 					<>
@@ -163,23 +161,7 @@ export default function ChatPage() {
 								return null;
 							})}
 						</div>
-
-						{/* INPUT */}
-						<div className="bg-white border-t border-dark/10 p-4 flex items-center gap-4 fixed bottom-0 left-80 right-0">
-							<input
-								value={input}
-								onChange={(e) => setInput(e.target.value)}
-								placeholder="Describe your staffing needs..."
-								className="flex-1 bg-background rounded-xl p-3 border border-dark/10 focus:outline-none"
-							/>
-
-							<button
-								onClick={sendMessage}
-								className="bg-primary text-white p-3 rounded-xl hover:opacity-90"
-							>
-								<Send className="w-5 h-5" />
-							</button>
-						</div>
+						<ChatInput value={input} onChange={setInput} onSend={sendMessage} />
 					</>
 				)}
 			</main>
