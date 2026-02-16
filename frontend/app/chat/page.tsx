@@ -67,6 +67,8 @@ export default function ChatPage() {
 			<main className="ml-80 flex-1 flex flex-col">
 				{/* EMPTY STATE */}
 				{!activeChat ? (
+
+					// TODO: Move into component Chat Welcome
 					<div className="flex-1 flex items-center justify-center px-8">
 						<div className="text-center max-w-md">
 							<div className="mx-auto mb-4 w-26 h-26 rounded-2xl bg-linear-to-br from-primary to-secondary flex items-center justify-center">
