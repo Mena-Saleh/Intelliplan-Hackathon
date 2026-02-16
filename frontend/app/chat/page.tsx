@@ -3,31 +3,11 @@
 import { useState } from "react";
 import Sidebar from "@/src/components/sidebar";
 import { MessageSquare, Send } from "lucide-react";
+import { Chat } from "@/models/Chat";
 
-type RiskLevel = "LOW" | "MEDIUM" | "HIGH";
 
-type Message =
-	| {
-			role: "bot" | "user";
-			type: "text";
-			content: string;
-	  }
-	| {
-			role: "bot";
-			type: "match";
-			candidates: {
-				name: string;
-				notes: string[];
-				risk: RiskLevel;
-			}[];
-	  };
 
-type Chat = {
-	id: string;
-	title: string;
-	createdAt: Date;
-	messages: Message[];
-};
+
 
 export default function ChatPage() {
 	const [chats, setChats] = useState<Chat[]>([]);
@@ -116,16 +96,16 @@ export default function ChatPage() {
 		const updatedChats = chats.map((chat) =>
 			chat.id === activeChat.id
 				? {
-						...chat,
-						messages: [
-							...chat.messages,
-							{
-								role: "user",
-								type: "text",
-								content: input,
-							},
-						],
-					}
+					...chat,
+					messages: [
+						...chat.messages,
+						{
+							role: "user",
+							type: "text",
+							content: input,
+						},
+					],
+				}
 				: chat,
 		);
 
@@ -178,11 +158,10 @@ export default function ChatPage() {
 									return (
 										<div
 											key={index}
-											className={`max-w-md w-fit whitespace-pre-line ${
-												msg.role === "user"
-													? "ml-auto bg-primary text-white"
-													: "bg-white"
-											} p-4 rounded-2xl shadow-sm border border-dark/10`}
+											className={`max-w-md w-fit whitespace-pre-line ${msg.role === "user"
+												? "ml-auto bg-primary text-white"
+												: "bg-white"
+												} p-4 rounded-2xl shadow-sm border border-dark/10`}
 										>
 											{msg.content}
 										</div>
@@ -206,7 +185,7 @@ export default function ChatPage() {
 														candidate.risk === "LOW"
 															? "bg-green-100 text-green-700"
 															: candidate.risk ===
-																  "MEDIUM"
+																"MEDIUM"
 																? "bg-yellow-100 text-yellow-700"
 																: "bg-red-100 text-red-700";
 
