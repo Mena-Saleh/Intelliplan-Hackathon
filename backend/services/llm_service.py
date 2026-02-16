@@ -18,7 +18,7 @@ You extract structured staffing data.
 
 Extract any of these fields if present:
 
-- date (YYYY-MM-DD) [Default to current year if only month and day are provided]
+- date (YYYY-MM-DD) [Default to current year (2026) if only month and day are provided]
 - start_time (HH:MM 24h)
 - end_time (HH:MM 24h)
 - department [OPTIONAL]
