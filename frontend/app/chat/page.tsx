@@ -3,31 +3,13 @@
 import { useState } from "react";
 import Sidebar from "@/src/components/sidebar";
 import { MessageSquare, Send } from "lucide-react";
+import { Chat } from "@/src/models/Chat";
+import { MOCK_CHAT_DATA } from "@/src/data/mockChatData";
+import ChatWelcome from "@/src/components/chatWelcome";
 
-type RiskLevel = "LOW" | "MEDIUM" | "HIGH";
 
-type Message =
-	| {
-			role: "bot" | "user";
-			type: "text";
-			content: string;
-	  }
-	| {
-			role: "bot";
-			type: "match";
-			candidates: {
-				name: string;
-				notes: string[];
-				risk: RiskLevel;
-			}[];
-	  };
 
-type Chat = {
-	id: string;
-	title: string;
-	createdAt: Date;
-	messages: Message[];
-};
+
 
 export default function ChatPage() {
 	const [chats, setChats] = useState<Chat[]>([]);
@@ -36,77 +18,16 @@ export default function ChatPage() {
 
 	const activeChat = chats.find((c) => c.id === activeChatId);
 
+
+	// Creating a new chat. Id and time of creation is set here, and mock mesages are set in src/data/mockChatData.ts
 	const createNewChat = () => {
 		const newChat: Chat = {
+			...MOCK_CHAT_DATA,
 			id: Date.now().toString(),
-			title: "New staffing request",
 			createdAt: new Date(),
-			messages: [
-				{
-					role: "bot",
-					type: "text",
-					content:
-						"Hi Johan! I'm your staffing assistant. Tell me about your staffing need — describe the situation and I’ll find the best available consultants for you.",
-				},
-				{
-					role: "user",
-					type: "text",
-					content:
-						"We have a sudden spike tomorrow morning. I need 3 forklift drivers from 06:00–14:00 at the inbound warehouse.",
-				},
-				{
-					role: "bot",
-					type: "text",
-					content:
-						"Got it. Let me check availability, competences and prior experience with Warehouse AB.",
-				},
-				{
-					role: "bot",
-					type: "match",
-					candidates: [
-						{
-							name: "Erik Svensson",
-							notes: [
-								"Forklift certified",
-								"Available 06:00–14:00",
-								"Worked at Warehouse AB before",
-							],
-							risk: "LOW",
-						},
-						{
-							name: "Ahmed Hassan",
-							notes: [
-								"Forklift certified",
-								"Available",
-								"No prior experience with this customer",
-							],
-							risk: "MEDIUM",
-						},
-						{
-							name: "Lukas Berg",
-							notes: [
-								"Available",
-								"Missing forklift certification",
-							],
-							risk: "HIGH",
-						},
-					],
-				},
-				{
-					role: "user",
-					type: "text",
-					content: "Let’s request Erik and Ahmed.",
-				},
-				{
-					role: "bot",
-					type: "text",
-					content:
-						"Request created. Delivery Manager will approve and confirm booking shortly.\n\nYou’ll be notified once the shift is confirmed.",
-				},
-			],
 		};
 
-		setChats((prev) => [newChat, ...prev]);
+		setChats([newChat, ...chats]);
 		setActiveChatId(newChat.id);
 	};
 
@@ -116,16 +37,16 @@ export default function ChatPage() {
 		const updatedChats = chats.map((chat) =>
 			chat.id === activeChat.id
 				? {
-						...chat,
-						messages: [
-							...chat.messages,
-							{
-								role: "user",
-								type: "text",
-								content: input,
-							},
-						],
-					}
+					...chat,
+					messages: [
+						...chat.messages,
+						{
+							role: "user",
+							type: "text",
+							content: input,
+						},
+					],
+				}
 				: chat,
 		);
 
@@ -147,28 +68,9 @@ export default function ChatPage() {
 			<main className="ml-80 flex-1 flex flex-col">
 				{/* EMPTY STATE */}
 				{!activeChat ? (
-					<div className="flex-1 flex items-center justify-center px-8">
-						<div className="text-center max-w-md">
-							<div className="mx-auto mb-4 w-26 h-26 rounded-2xl bg-linear-to-br from-primary to-secondary flex items-center justify-center">
-								<MessageSquare className="w-12 h-12 text-white" />
-							</div>
 
-							<h2 className="mb-4">Welcome, Johan!</h2>
-
-							<p className="text-body/70 mb-4">
-								Describe your staffing needs in plain language
-								and I'll find the best available consultants for
-								you.
-							</p>
-
-							<button
-								onClick={createNewChat}
-								className="bg-accent text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition duration-200"
-							>
-								+ Start New Request
-							</button>
-						</div>
-					</div>
+					// TODO: Move into component Chat Welcome
+					<ChatWelcome onNewChat={createNewChat} />
 				) : (
 					<>
 						{/* MESSAGES */}
@@ -178,11 +80,10 @@ export default function ChatPage() {
 									return (
 										<div
 											key={index}
-											className={`max-w-md w-fit whitespace-pre-line ${
-												msg.role === "user"
-													? "ml-auto bg-primary text-white"
-													: "bg-white"
-											} p-4 rounded-2xl shadow-sm border border-dark/10`}
+											className={`max-w-md w-fit whitespace-pre-line ${msg.role === "user"
+												? "ml-auto bg-primary text-white"
+												: "bg-white"
+												} p-4 rounded-2xl shadow-sm border border-dark/10`}
 										>
 											{msg.content}
 										</div>
@@ -206,7 +107,7 @@ export default function ChatPage() {
 														candidate.risk === "LOW"
 															? "bg-green-100 text-green-700"
 															: candidate.risk ===
-																  "MEDIUM"
+																"MEDIUM"
 																? "bg-yellow-100 text-yellow-700"
 																: "bg-red-100 text-red-700";
 
