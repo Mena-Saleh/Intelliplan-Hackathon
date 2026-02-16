@@ -354,46 +354,64 @@ export default function DashboardPage() {
 					</div>
 				)}
 
+				{/* Recent Activity */}
 				<div>
-					{/* Recent Activity */}
 					<h3 className="mt-12 mb-4 flex items-center gap-2 text-primary">
 						<Activity className="w-5 h-5" />
 						Recent Activity
 					</h3>
-					<p className="text-body/60">No processed requests yet.</p>
-				</div>
 
-				<div className="space-y-3">
-					{requests
-						.filter((r) => r.status !== "pending")
-						.map((r) => (
-							<div
-								key={r.id}
-								className="bg-surface p-4 rounded-xl border border-dark/10 flex justify-between"
-							>
-								<div>
-									<p className="font-semibold">
-										{r.customer} – {r.role}
-									</p>
-									<p className="text-sm text-body/60">
-										{r.date} · {r.location}
-									</p>
-								</div>
+					{requests.filter((r) => r.status !== "pending").length ===
+						0 && (
+						<p className="text-body/60">
+							No processed requests yet.
+						</p>
+					)}
 
-								<span
-									className={`text-xs px-3 py-1 rounded-full ${
-										r.status === "approved"
-											? "bg-[#4DD07D]/10 text-[#4DD07D]"
-											: r.status === "rejected"
-												? "bg-[#F26969]/10 text-[#F26969]"
-												: "bg-[#F7B23B]/10 text-[#F7B23B]"
-									}`}
+					<div className="space-y-3">
+						{requests
+							.filter((r) => r.status !== "pending")
+							.map((r) => (
+								<div
+									key={r.id}
+									className="bg-surface p-4 rounded-xl border border-dark/10 flex justify-between items-center"
 								>
-									{r.status}
-								</span>
-							</div>
-						))}
+									<div>
+										<p className="font-semibold">
+											{r.customer} – {r.role}
+										</p>
+										<p className="text-sm text-body/60">
+											{r.date} · {r.location}
+										</p>
+									</div>
+
+									<span
+										className={`flex items-center gap-2 whitespace-nowrap text-sm px-4 py-1.5 rounded-full font-medium ${
+											r.status === "approved"
+												? "bg-[#4DD07D]/15 text-[#4DD07D]"
+												: r.status === "rejected"
+													? "bg-[#F26969]/15 text-[#F26969]"
+													: "bg-[#F7B23B]/15 text-[#F7B23B]"
+										}`}
+									>
+										{r.status === "approved" && (
+											<CheckCircle className="w-4 h-4" />
+										)}
+										{r.status === "rejected" && (
+											<XCircle className="w-4 h-4" />
+										)}
+										{r.status === "bypassed" && (
+											<AlertTriangle className="w-4 h-4" />
+										)}
+
+										{r.status.charAt(0).toUpperCase() +
+											r.status.slice(1)}
+									</span>
+								</div>
+							))}
+					</div>
 				</div>
+				
 			</main>
 		</div>
 	);
