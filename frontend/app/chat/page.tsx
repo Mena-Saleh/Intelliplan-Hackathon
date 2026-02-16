@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Sidebar from "@/src/components/sidebar";
-import { MessageSquare, Send } from "lucide-react";
 import { Chat } from "@/src/models/Chat";
 import { MOCK_CHAT_DATA } from "@/src/data/mockChatData";
 import ChatWelcome from "@/src/components/chatWelcome";
@@ -69,8 +68,6 @@ export default function ChatPage() {
 			<main className="ml-80 flex-1 flex flex-col">
 				{/* EMPTY STATE */}
 				{!activeChat ? (
-
-					// TODO: Move into component Chat Welcome
 					<ChatWelcome onNewChat={createNewChat} />
 				) : (
 					<>
@@ -164,8 +161,6 @@ export default function ChatPage() {
 								return null;
 							})}
 						</div>
-
-						{/* INPUT moved into components/chatInput.tsx*/}
 						<ChatInput value={input} onChange={setInput} onSend={sendMessage} />
 					</>
 				)}
