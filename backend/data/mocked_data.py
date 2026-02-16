@@ -1,16 +1,8 @@
 from datetime import date, time
-from models import (
-    Consultant,
-    Availability,
-    TimeSlot,
-    Customer,
-    StaffingNeed,
-)
+from backend.models.domain import Consultant, Customer, StaffingNeed, Availability, TimeSlot
 
 # CONSULTANTS
-
 consultants = [
-
     Consultant(
         id="C1",
         competences=[
@@ -613,308 +605,288 @@ Consultant(
 ),
 ]
 
-# CUSTOMERS AND STAFFING NEEDS
+# CUSTOMERS
+customers = [
+    Customer(
+        id="K1",
+        name="Region Stockholm Healthcare Authority",
+        required_competences_per_department={
+            "ICU": [
+                "Registered Nurse",
+                "Intensive care experience",
+                "Ventilator handling",
+                "Critical patient monitoring"
+            ],
+            "Emergency": [
+                "Emergency response",
+                "Trauma assessment",
+                "Acute stabilization"
+            ]
+        },
+        preferred_consultants=["C1", "C10"]
+    ),
+    Customer(
+        id="K2",
+        name="Nordic Fintech Solutions",
+        required_competences_per_department={
+            "Platform Engineering": [
+                "Backend API development",
+                "Python server-side programming",
+                "Microservices architecture",
+                "Secure authentication systems"
+            ],
+            "DevOps": [
+                "CI/CD automation",
+                "Cloud infrastructure management",
+                "Container orchestration"
+            ]
+        },
+        preferred_consultants=["C9"]
+    ),
+    Customer(
+        id="K3",
+        name="Scandinavian AI Labs",
+        required_competences_per_department={
+            "AI Research": [
+                "Natural language processing",
+                "Large language model development",
+                "Vector embeddings",
+                "Semantic similarity search"
+            ]
+        },
+        preferred_consultants=["C4"]
+    ),
+    Customer(
+        id="K4",
+        name="Nordic Retail Logistics AB",
+        required_competences_per_department={
+            "Distribution Center": [
+                "High-volume goods handling",
+                "Material movement coordination",
+                "Inventory reliability"
+            ]
+        },
+        preferred_consultants=[]
+    ),
+    Customer(
+        id="K5",
+        name="ScandExpress Parcel Services",
+        required_competences_per_department={
+            "Last Mile Operations": [
+                "Timely parcel distribution",
+                "Urban navigation efficiency"
+            ]
+        },
+        preferred_consultants=[]
+    ),
+    Customer(
+        id="K6",
+        name="FreshMarket Scandinavia",
+        required_competences_per_department={
+            "Retail Floor": [
+                "Customer engagement",
+                "Transaction handling",
+                "Store presentation"
+            ]
+        },
+        preferred_consultants=[]
+    ),
+    Customer(
+        id="K7",
+        name="Metropolitan Acute Care Hospital",
+        required_competences_per_department={
+            "Emergency Services": [
+                "Rapid clinical decision-making",
+                "Acute patient stabilization"
+            ]
+        },
+        preferred_consultants=[]
+    ),
+    Customer(
+        id="K8",
+        name="SilverLife Residential Care",
+        required_competences_per_department={
+            "Long-Term Care": [
+                "Resident support",
+                "Daily living assistance"
+            ]
+        },
+        preferred_consultants=[]
+    ),
+    Customer(
+        id="K9",
+        name="Nordic Food Distribution",
+        required_competences_per_department={
+            "Cold Storage Operations": [
+                "Temperature-sensitive goods handling",
+                "Warehouse hygiene compliance"
+            ]
+        },
+        preferred_consultants=[]
+    ),
+    Customer(
+        id="K10",
+        name="Scandinavian Freight Network",
+        required_competences_per_department={
+            "Transport Division": [
+                "Heavy vehicle operation",
+                "Long-haul logistics"
+            ]
+        },
+        preferred_consultants=[]
+    )
+]
 
-customer1 = Customer(
-    id="K1",
-    name="Region Stockholm Healthcare Authority",
-    required_competences_per_department={
-        "ICU": [
-            "Registered Nurse",
-            "Intensive care experience",
-            "Ventilator handling",
-            "Critical patient monitoring"
+# STAFFING NEEDS
+staffing_needs = [
+    StaffingNeed(
+        id="S1",
+        date=date(2026, 2, 20),
+        start_time=time(8, 0),
+        end_time=time(16, 0),
+        required_competences=[
+            "Senior clinician comfortable managing life-support equipment",
+            "Experience working with unstable post-surgical patients",
+            "Ability to respond calmly in rapidly deteriorating situations",
+            "Familiar with advanced monitoring technologies"
         ],
-        "Emergency": [
-            "Emergency response",
-            "Trauma assessment",
-            "Acute stabilization"
-        ]
-    },
-    preferred_consultants=["C1", "C10"]
-)
-
-staffing_need1 = StaffingNeed(
-    id="S1",
-    date=date(2026, 2, 20),
-    start_time=time(8, 0),
-    end_time=time(16, 0),
-    required_competences=[
-        "Senior clinician comfortable managing life-support equipment",
-        "Experience working with unstable post-surgical patients",
-        "Ability to respond calmly in rapidly deteriorating situations",
-        "Familiar with advanced monitoring technologies"
-    ],
-    customer_id="K1",
-    department="ICU",
-    urgency_level="high"
-)
-
-
-customer2 = Customer(
-    id="K2",
-    name="Nordic Fintech Solutions",
-    required_competences_per_department={
-        "Platform Engineering": [
-            "Backend API development",
-            "Python server-side programming",
-            "Microservices architecture",
-            "Secure authentication systems"
+        customer_id="K1",
+        department="ICU",
+        urgency_level="high"
+    ),
+    StaffingNeed(
+        id="S2",
+        date=date(2026, 3, 2),
+        start_time=time(9, 0),
+        end_time=time(17, 0),
+        required_competences=[
+            "Engineer experienced in building high-throughput server systems",
+            "Designing secure service interfaces for business platforms",
+            "Handling concurrent request workflows",
+            "Comfortable implementing identity and permission layers"
         ],
-        "DevOps": [
-            "CI/CD automation",
-            "Cloud infrastructure management",
-            "Container orchestration"
-        ]
-    },
-    preferred_consultants=["C9"]
-)
-
-staffing_need2 = StaffingNeed(
-    id="S2",
-    date=date(2026, 3, 2),
-    start_time=time(9, 0),
-    end_time=time(17, 0),
-    required_competences=[
-        "Engineer experienced in building high-throughput server systems",
-        "Designing secure service interfaces for business platforms",
-        "Handling concurrent request workflows",
-        "Comfortable implementing identity and permission layers"
-    ],
-    customer_id="K2",
-    department="Platform Engineering",
-    urgency_level="medium"
-)
-
-
-customer3 = Customer(
-    id="K3",
-    name="Scandinavian AI Labs",
-    required_competences_per_department={
-        "AI Research": [
-            "Natural language processing",
-            "Large language model development",
-            "Vector embeddings",
-            "Semantic similarity search"
-        ]
-    },
-    preferred_consultants=["C4"]
-)
-
-staffing_need3 = StaffingNeed(
-    id="S3",
-    date=date(2026, 3, 5),
-    start_time=time(10, 0),
-    end_time=time(18, 0),
-    required_competences=[
-        "Specialist in language-driven AI systems",
-        "Experience working with large-scale text understanding models",
-        "Building semantic indexing pipelines",
-        "Deploying AI capabilities into production environments"
-    ],
-    customer_id="K3",
-    department="AI Research",
-    urgency_level="high"
-)
-
-
-customer4 = Customer(
-    id="K4",
-    name="Nordic Retail Logistics AB",
-    required_competences_per_department={
-        "Distribution Center": [
-            "High-volume goods handling",
-            "Material movement coordination",
-            "Inventory reliability"
-        ]
-    },
-    preferred_consultants=[]
-)
-
-staffing_need4 = StaffingNeed(
-    id="S4",
-    date=date(2026, 3, 10),
-    start_time=time(6, 0),
-    end_time=time(14, 0),
-    required_competences=[
-        "Experience working in large-scale goods terminals",
-        "Comfortable operating mechanical lifting equipment",
-        "Used to fast-paced loading and unloading processes",
-        "Strong focus on workplace safety procedures"
-    ],
-    customer_id="K4",
-    department="Distribution Center",
-    urgency_level="medium"
-)
-
-
-customer5 = Customer(
-    id="K5",
-    name="ScandExpress Parcel Services",
-    required_competences_per_department={
-        "Last Mile Operations": [
-            "Timely parcel distribution",
-            "Urban navigation efficiency"
-        ]
-    },
-    preferred_consultants=[]
-)
-
-staffing_need5 = StaffingNeed(
-    id="S5",
-    date=date(2026, 3, 12),
-    start_time=time(8, 0),
-    end_time=time(17, 0),
-    required_competences=[
-        "Independent worker managing daily drop schedules",
-        "Confident navigating city traffic environments",
-        "Handling customer-facing deliveries professionally",
-        "Maintaining punctuality under tight timelines"
-    ],
-    customer_id="K5",
-    department="Last Mile Operations",
-    urgency_level="high"
-)
-
-customer6 = Customer(
-    id="K6",
-    name="FreshMarket Scandinavia",
-    required_competences_per_department={
-        "Retail Floor": [
-            "Customer engagement",
-            "Transaction handling",
-            "Store presentation"
-        ]
-    },
-    preferred_consultants=[]
-)
-
-staffing_need6 = StaffingNeed(
-    id="S6",
-    date=date(2026, 3, 14),
-    start_time=time(12, 0),
-    end_time=time(20, 0),
-    required_competences=[
-        "Experience assisting customers in busy store environments",
-        "Comfortable managing payment systems and cash balancing",
-        "Ensuring shelves remain organized and fully stocked",
-        "Handling high foot traffic periods calmly"
-    ],
-    customer_id="K6",
-    department="Retail Floor",
-    urgency_level="medium"
-)
-
-
-customer7 = Customer(
-    id="K7",
-    name="Metropolitan Acute Care Hospital",
-    required_competences_per_department={
-        "Emergency Services": [
-            "Rapid clinical decision-making",
-            "Acute patient stabilization"
-        ]
-    },
-    preferred_consultants=[]
-)
-
-staffing_need7 = StaffingNeed(
-    id="S7",
-    date=date(2026, 3, 18),
-    start_time=time(9, 0),
-    end_time=time(17, 0),
-    required_competences=[
-        "Medical professional experienced in high-pressure treatment settings",
-        "Capable of assessing and managing sudden trauma cases",
-        "Comfortable supervising junior clinical staff",
-        "Strong diagnostic judgement under time constraints"
-    ],
-    customer_id="K7",
-    department="Emergency Services",
-    urgency_level="high"
-)
-
-customer8 = Customer(
-    id="K8",
-    name="SilverLife Residential Care",
-    required_competences_per_department={
-        "Long-Term Care": [
-            "Resident support",
-            "Daily living assistance"
-        ]
-    },
-    preferred_consultants=[]
-)
-
-staffing_need8 = StaffingNeed(
-    id="S8",
-    date=date(2026, 3, 20),
-    start_time=time(8, 0),
-    end_time=time(16, 0),
-    required_competences=[
-        "Experience supporting elderly individuals in residential settings",
-        "Assisting with mobility and medication routines",
-        "Providing compassionate day-to-day care",
-        "Monitoring general wellbeing of residents"
-    ],
-    customer_id="K8",
-    department="Long-Term Care",
-    urgency_level="medium"
-)
-
-customer9 = Customer(
-    id="K9",
-    name="Nordic Food Distribution",
-    required_competences_per_department={
-        "Cold Storage Operations": [
-            "Temperature-sensitive goods handling",
-            "Warehouse hygiene compliance"
-        ]
-    },
-    preferred_consultants=[]
-)
-
-staffing_need9 = StaffingNeed(
-    id="S9",
-    date=date(2026, 3, 22),
-    start_time=time(7, 0),
-    end_time=time(15, 0),
-    required_competences=[
-        "Experience working in refrigerated logistics environments",
-        "Handling perishable products carefully",
-        "Understanding food safety standards",
-        "Comfortable with physically demanding warehouse tasks"
-    ],
-    customer_id="K9",
-    department="Cold Storage Operations",
-    urgency_level="medium"
-)
-
-customer10 = Customer(
-    id="K10",
-    name="Scandinavian Freight Network",
-    required_competences_per_department={
-        "Transport Division": [
-            "Heavy vehicle operation",
-            "Long-haul logistics"
-        ]
-    },
-    preferred_consultants=[]
-)
-
-staffing_need10 = StaffingNeed(
-    id="S10",
-    date=date(2026, 3, 25),
-    start_time=time(6, 0),
-    end_time=time(18, 0),
-    required_competences=[
-        "Licensed driver experienced in transporting large cargo loads",
-        "Comfortable planning extended travel routes",
-        "Performing vehicle condition inspections",
-        "Ensuring regulatory compliance during transport"
-    ],
-    customer_id="K10",
-    department="Transport Division",
-    urgency_level="high"
-)
-
+        customer_id="K2",
+        department="Platform Engineering",
+        urgency_level="medium"
+    ),
+    StaffingNeed(
+        id="S3",
+        date=date(2026, 3, 5),
+        start_time=time(10, 0),
+        end_time=time(18, 0),
+        required_competences=[
+            "Specialist in language-driven AI systems",
+            "Experience working with large-scale text understanding models",
+            "Building semantic indexing pipelines",
+            "Deploying AI capabilities into production environments"
+        ],
+        customer_id="K3",
+        department="AI Research",
+        urgency_level="high"
+    ),
+    StaffingNeed(
+        id="S4",
+        date=date(2026, 3, 10),
+        start_time=time(6, 0),
+        end_time=time(14, 0),
+        required_competences=[
+            "Experience working in large-scale goods terminals",
+            "Comfortable operating mechanical lifting equipment",
+            "Used to fast-paced loading and unloading processes",
+            "Strong focus on workplace safety procedures"
+        ],
+        customer_id="K4",
+        department="Distribution Center",
+        urgency_level="medium"
+    ),
+    StaffingNeed(
+        id="S5",
+        date=date(2026, 3, 12),
+        start_time=time(8, 0),
+        end_time=time(17, 0),
+        required_competences=[
+            "Independent worker managing daily drop schedules",
+            "Confident navigating city traffic environments",
+            "Handling customer-facing deliveries professionally",
+            "Maintaining punctuality under tight timelines"
+        ],
+        customer_id="K5",
+        department="Last Mile Operations",
+        urgency_level="high"
+    ),
+    StaffingNeed(
+        id="S6",
+        date=date(2026, 3, 14),
+        start_time=time(12, 0),
+        end_time=time(20, 0),
+        required_competences=[
+            "Experience assisting customers in busy store environments",
+            "Comfortable managing payment systems and cash balancing",
+            "Ensuring shelves remain organized and fully stocked",
+            "Handling high foot traffic periods calmly"
+        ],
+        customer_id="K6",
+        department="Retail Floor",
+        urgency_level="medium"
+    ),
+    StaffingNeed(
+        id="S7",
+        date=date(2026, 3, 18),
+        start_time=time(9, 0),
+        end_time=time(17, 0),
+        required_competences=[
+            "Medical professional experienced in high-pressure treatment settings",
+            "Capable of assessing and managing sudden trauma cases",
+            "Comfortable supervising junior clinical staff",
+            "Strong diagnostic judgement under time constraints"
+        ],
+        customer_id="K7",
+        department="Emergency Services",
+        urgency_level="high"
+    ),
+    StaffingNeed(
+        id="S8",
+        date=date(2026, 3, 20),
+        start_time=time(8, 0),
+        end_time=time(16, 0),
+        required_competences=[
+            "Experience supporting elderly individuals in residential settings",
+            "Assisting with mobility and medication routines",
+            "Providing compassionate day-to-day care",
+            "Monitoring general wellbeing of residents"
+        ],
+        customer_id="K8",
+        department="Long-Term Care",
+        urgency_level="medium"
+    ),
+    StaffingNeed(
+        id="S9",
+        date=date(2026, 3, 22),
+        start_time=time(7, 0),
+        end_time=time(15, 0),
+        required_competences=[
+            "Experience working in refrigerated logistics environments",
+            "Handling perishable products carefully",
+            "Understanding food safety standards",
+            "Comfortable with physically demanding warehouse tasks"
+        ],
+        customer_id="K9",
+        department="Cold Storage Operations",
+        urgency_level="medium"
+    ),
+    StaffingNeed(
+        id="S10",
+        date=date(2026, 3, 25),
+        start_time=time(6, 0),
+        end_time=time(18, 0),
+        required_competences=[
+            "Licensed driver experienced in transporting large cargo loads",
+            "Comfortable planning extended travel routes",
+            "Performing vehicle condition inspections",
+            "Ensuring regulatory compliance during transport"
+        ],
+        customer_id="K10",
+        department="Transport Division",
+        urgency_level="high"
+    )
+]
