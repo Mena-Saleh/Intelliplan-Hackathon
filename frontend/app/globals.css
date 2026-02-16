@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand Colors */
+  --color-brand-primary: #0098C3;
+  --color-brand-accent: #EC7A08;
+  --color-brand-dark: #002F5F;
+  --color-brand-secondary: #71B799;
+  
+  /* Ssecondaryes */
+  --color-bg-page: #F2F7FC;
+  --color-bg-surface: #FFFFFF;
+
+  /* Text */
+  --color-text-primary: #002F5F;
+  --color-text-body: #171717; 
+
+  /* Fonts */
+  --font-heading: "Raleway", sans-serif;
+  --font-body: "Poppins", sans-serif;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--color-brand-primary);
+  --color-accent: var(--color-brand-accent);
+  --color-dark: var(--color-brand-dark);
+  --color-secondary: var(--color-brand-secondary);
+
+  --color-background: var(--color-bg-page);
+  --color-surface: var(--color-bg-surface);
+
+  --color-heading: var(--color-text-primary);
+  --color-body: var(--color-text-body);
+
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  color: var(--color-text-primary);
+  font-weight: bold;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+h1 {
+  font-size: 2.25rem;
+}
+
+h2 {
+  font-size: 1.875rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+button {
+  cursor: pointer;
 }
