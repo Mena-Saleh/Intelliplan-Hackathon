@@ -166,7 +166,7 @@ export default function ChatPage() {
 						</div>
 
 						{/* INPUT moved into components/chatInput.tsx*/}
-						<ChatInput />
+						<ChatInput value={input} onChange={setInput} onSend={sendMessage} />
 					</>
 				)}
 			</main>
