@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Sidebar from "@/src/components/sidebar";
 import { MessageSquare, Send } from "lucide-react";
-import { Chat } from "@/models/Chat";
+import { Chat } from "@/src/models/Chat";
+import { MOCK_CHAT_DATA } from "@/src/data/mockChatData";
 
 
 
@@ -16,77 +17,16 @@ export default function ChatPage() {
 
 	const activeChat = chats.find((c) => c.id === activeChatId);
 
+
+	// Creating a new chat. Id and time of creation is set here, and mock mesages are set in src/data/mockChatData.ts
 	const createNewChat = () => {
 		const newChat: Chat = {
+			...MOCK_CHAT_DATA,
 			id: Date.now().toString(),
-			title: "New staffing request",
 			createdAt: new Date(),
-			messages: [
-				{
-					role: "bot",
-					type: "text",
-					content:
-						"Hi Johan! I'm your staffing assistant. Tell me about your staffing need — describe the situation and I’ll find the best available consultants for you.",
-				},
-				{
-					role: "user",
-					type: "text",
-					content:
-						"We have a sudden spike tomorrow morning. I need 3 forklift drivers from 06:00–14:00 at the inbound warehouse.",
-				},
-				{
-					role: "bot",
-					type: "text",
-					content:
-						"Got it. Let me check availability, competences and prior experience with Warehouse AB.",
-				},
-				{
-					role: "bot",
-					type: "match",
-					candidates: [
-						{
-							name: "Erik Svensson",
-							notes: [
-								"Forklift certified",
-								"Available 06:00–14:00",
-								"Worked at Warehouse AB before",
-							],
-							risk: "LOW",
-						},
-						{
-							name: "Ahmed Hassan",
-							notes: [
-								"Forklift certified",
-								"Available",
-								"No prior experience with this customer",
-							],
-							risk: "MEDIUM",
-						},
-						{
-							name: "Lukas Berg",
-							notes: [
-								"Available",
-								"Missing forklift certification",
-							],
-							risk: "HIGH",
-						},
-					],
-				},
-				{
-					role: "user",
-					type: "text",
-					content: "Let’s request Erik and Ahmed.",
-				},
-				{
-					role: "bot",
-					type: "text",
-					content:
-						"Request created. Delivery Manager will approve and confirm booking shortly.\n\nYou’ll be notified once the shift is confirmed.",
-				},
-			],
 		};
 
-		setChats((prev) => [newChat, ...prev]);
+		setChats([newChat, ...chats]);
 		setActiveChatId(newChat.id);
 	};
 
