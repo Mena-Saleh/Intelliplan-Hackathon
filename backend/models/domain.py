@@ -14,17 +14,17 @@ class Consultant(BaseModel):
     competences: List[str] 
     availability: Availability
     customer_experience: List[str] 
-    rating: float | None = None # 1-5 optional
+    rating: float | None = None
 
 class StaffingNeed(BaseModel):
-    id: str
+    id: str| None = None
     date: date
     start_time: time
     end_time: time
     required_competences: List[str]
-    customer_id: str
-    department: str
-    urgency_level: Literal["low", "medium", "high"]
+    customer_id: str | None = None
+    department: str | None = None
+    urgency_level: Literal["low", "medium", "high"] | None = None
 
 class Customer(BaseModel):
     id: str
