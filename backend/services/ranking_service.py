@@ -22,15 +22,6 @@ class RankingService:
 
         return available
 
-    def build_need_text(self, staffing_need):
-        parts = [
-            f"Department: {staffing_need.department}",
-            "Required competences:"
-        ]
-        parts.extend(staffing_need.required_competences)
-
-        return " ".join(parts)
-
     def compute_similarities(self, consultant, need_embedding):
         competence_text = " ".join(consultant.competences)
         competence_embedding = self.embedding_service.embed(competence_text)
@@ -59,7 +50,7 @@ class RankingService:
         )
 
     def assess_risk(self, competence_sim, experience_sim, urgency_level):
-        delta = 0 if urgency_level == "low" else 0.03 if urgency_level == "medium" else 0.06
+        delta = 0 if urgency_level == "low" else 0.01 if urgency_level == "medium" else 0.02
 
         if competence_sim < 0.5 + delta:
             return RiskAssessment(
@@ -88,8 +79,6 @@ class RankingService:
         if filter_availability:
             consultants = self.filter_by_availability(consultants, staffing_need)
             
-        # need_text = self.build_need_text(staffing_need)
-        # need_embedding = self.embedding_service.embed(need_text)
         need_text = " ".join(staffing_need.required_competences)
         need_embedding = self.embedding_service.embed(need_text)
 
