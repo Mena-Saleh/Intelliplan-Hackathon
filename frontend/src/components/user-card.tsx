@@ -10,7 +10,7 @@ export default function UserCard({ user }: { user: User }) {
   const compact = collapsed || phase === "collapsing";
 
   return (
-    <div className="border-t border-dark/10 p-2 z-999">
+    <div className="border-t border-dark/10 p-2 z-999 mt-auto">
       <div
         className={`
           flex items-center rounded-xl transition-all duration-200
@@ -26,12 +26,8 @@ export default function UserCard({ user }: { user: User }) {
         {/* Identity text only in expanded mode */}
         {!compact && (
           <div className="leading-tight">
-            <p className="text-sm font-semibold whitespace-nowrap">
-              {user.name}
-            </p>
-            <p className="text-xs text-body/50 whitespace-nowrap">
-              {user.role}
-            </p>
+            <p className="text-sm font-semibold whitespace-nowrap">{user.name}</p>
+            <p className="text-xs text-body/50 whitespace-nowrap">{user.role}</p>
           </div>
         )}
       </div>
