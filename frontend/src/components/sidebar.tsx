@@ -85,7 +85,7 @@ export default function Sidebar({ children, user }: Props) {
 
     lg:fixed lg:top-0 lg:left-0 lg:h-screen lg:border-b-0 lg:border-r
     ${collapsed ? "lg:w-14" : "lg:w-80"}
-        `}
+  `}
       >
         {/* Collapsed overlay — covers entire sidebar */}
         {collapsed && (
@@ -129,18 +129,17 @@ export default function Sidebar({ children, user }: Props) {
               aria-label="Collapse sidebar"
               className="
       hidden lg:block
-        absolute right-2 top-2
-        rounded-lg p-2
-        transition-colors duration-200
-        hover:bg-neutral-600
-      "
+      absolute right-2 top-2
+      rounded-lg p-2
+      transition-colors duration-200
+      hover:bg-neutral-600
+    "
               style={{ cursor: "w-resize" }}
             >
               <PanelRightOpen className="transition-transform duration-200" />
             </button>
           )}
         </div>
-
         {/* Content */}
         {children}
 
