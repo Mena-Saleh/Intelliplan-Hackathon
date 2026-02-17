@@ -64,7 +64,7 @@ export default function ChatPage() {
       <main className="ml-80 flex-1 flex flex-col">
         {/* EMPTY STATE */}
         {!activeChat ? (
-          <ChatWelcome onNewChat={createNewChat} />
+          <ChatWelcome onNewChat={createNewChat} username="Johan" />
         ) : (
           <>
             {/* MESSAGES */}
