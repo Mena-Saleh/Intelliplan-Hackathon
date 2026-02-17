@@ -17,9 +17,9 @@ class ChatRequest(BaseModel):
 
 
 FIELD_QUESTIONS = {
-    "date": "What date is the staffing needed? (YYYY-MM-DD)",
-    "start_time": "What is the start time? (HH:MM, 24h format)",
-    "end_time": "What is the end time? (HH:MM, 24h format)",
+    "date": "What date is the staffing needed?",
+    "start_time": "What is the start time?",
+    "end_time": "What is the end time?",
     "required_competences": "What competences are required? Please list them.",
 }
 

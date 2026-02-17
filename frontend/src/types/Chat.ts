@@ -1,5 +1,15 @@
 export type RiskLevel = "LOW" | "MEDIUM" | "HIGH";
 
+export type MatchCandidate = {
+    id: string;
+    name: string;
+    rating?: number | null;
+    risk: RiskLevel;
+    riskReason: string;
+    competences: string[];
+    customerExperience: string[];
+};
+
 export type Message =
     | {
         role: "bot" | "user";
@@ -8,12 +18,13 @@ export type Message =
     }
     | {
         role: "bot";
+        type: "loading";
+        content: string;
+    }
+    | {
+        role: "bot";
         type: "match";
-        candidates: {
-            name: string;
-            notes: string[];
-            risk: RiskLevel;
-        }[];
+        candidates: MatchCandidate[];
     };
 
 export type Chat = {
@@ -21,4 +32,5 @@ export type Chat = {
     title: string;
     createdAt: Date;
     messages: Message[];
+    sessionId?: string;
 };
