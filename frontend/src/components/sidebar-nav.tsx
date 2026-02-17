@@ -10,12 +10,22 @@ export default function SidebarNav({ variant }: { variant: string }) {
   const { showText, showTooltip, iconOnly } = useSidebar();
 
   const navConfig = {
-    manager: [{ name: "Dashboard", href: "/dashboard", icon: LayoutDashboard }],
-    consultant: [
-      { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-      { name: "Work History", href: "/history", icon: Clock },
-    ],
-    customer: [{ name: "My Requests", href: "/chat", icon: MessageSquare }],
+		manager: [
+			{ name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+		],
+		consultant: [
+			{
+				name: "Dashboard",
+				href: "/consultant/dashboard",
+				icon: LayoutDashboard,
+			},
+			{
+				name: "Work History",
+				href: "/consultant/work-history",
+				icon: Clock,
+			},
+		],
+		customer: [{ name: "My Requests", href: "/chat", icon: MessageSquare }],
   };
 
   return (
