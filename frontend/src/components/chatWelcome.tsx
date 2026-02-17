@@ -5,9 +5,10 @@ import RequestButton from "./request-button";
 // Will call on createNewChat in chat/page
 interface ChatWelcomeProps {
   onNewChat: () => void;
+  username: string;
 }
 
-export default function ChatWelcome({ onNewChat }: ChatWelcomeProps) {
+export default function ChatWelcome({ onNewChat, username }: ChatWelcomeProps) {
   return (
     <>
       {/* // If cht is not active, show this component */}
@@ -17,7 +18,7 @@ export default function ChatWelcome({ onNewChat }: ChatWelcomeProps) {
             <MessageSquare className="h-12 w-12 text-white" />
           </div>
 
-          <h2 className="mb-4">Welcome, Johan!</h2>
+          <h2 className="mb-4">Welcome, {username}</h2>
 
           <p className="mb-4 text-body/70">
             Describe your staffing needs in plain language and I'll find the
