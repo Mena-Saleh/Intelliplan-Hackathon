@@ -1,37 +1,37 @@
 "use client";
 import { MessageSquare } from "lucide-react";
+import RequestButton from "./request-button";
 
 // Will call on createNewChat in chat/page
 interface ChatWelcomeProps {
-    onNewChat: () => void;
+  onNewChat: () => void;
 }
 
 export default function ChatWelcome({ onNewChat }: ChatWelcomeProps) {
-    return (
-        <>
-            {/* // If cht is not active, show this component */}
-            <div className="flex-1 flex items-center justify-center px-8">
-                <div className="text-center max-w-md">
-                    <div className="mx-auto mb-4 w-26 h-26 rounded-2xl bg-linear-to-br from-primary to-secondary flex items-center justify-center">
-                        <MessageSquare className="w-12 h-12 text-white" />
-                    </div>
+  return (
+    <>
+      {/* // If cht is not active, show this component */}
+      <div className="flex flex-1 items-center justify-center px-8">
+        <div className="max-w-md text-center">
+          <div className="mx-auto mb-4 flex h-26 w-26 items-center justify-center rounded-2xl bg-linear-to-br from-primary to-secondary">
+            <MessageSquare className="h-12 w-12 text-white" />
+          </div>
 
-                    <h2 className="mb-4">Welcome, Johan!</h2>
+          <h2 className="mb-4">Welcome, Johan!</h2>
 
-                    <p className="text-body/70 mb-4">
-                        Describe your staffing needs in plain language
-                        and I'll find the best available consultants for
-                        you.
-                    </p>
+          <p className="mb-4 text-body/70">
+            Describe your staffing needs in plain language and I'll find the
+            best available consultants for you.
+          </p>
 
-                    <button
-                        onClick={onNewChat}
-                        className="bg-accent text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition duration-200"
-                    >
-                        + Start New Request
-                    </button>
-                </div>
-            </div>
-        </>
-    )
+          <RequestButton
+            action={onNewChat}
+            label="+ Start New Request"
+            styles="px-6"
+          />
+        </div>
+      </div>
+    </>
+  );
 }
+
