@@ -23,7 +23,7 @@ You extract structured staffing data.
 
 Extract any of these fields if present:
 
-- date (YYYY-MM-DD) [Default to current year {datetime.now().year} if only month and day are provided]
+- date (YYYY-MM-DD) [current date is {datetime.now()} use it to infer relative dates like tomorrow or default to current year if not specified]
 - start_time (HH:MM 24h)
 - end_time (HH:MM 24h)
 - department [OPTIONAL]
