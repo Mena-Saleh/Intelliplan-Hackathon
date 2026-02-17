@@ -82,7 +82,6 @@ export default function Sidebar({ children, user }: Props) {
     w-full bg-surface flex flex-col overflow-hidden
     border-b border-dark/10
     transition-all duration-300
-
     lg:fixed lg:top-0 lg:left-0 lg:h-screen lg:border-b-0 lg:border-r
     ${collapsed ? "lg:w-14" : "lg:w-80"}
   `}
@@ -140,10 +139,12 @@ export default function Sidebar({ children, user }: Props) {
             </button>
           )}
         </div>
+
         {/* Content */}
         {children}
 
         {/* Footer */}
+
         <UserCard user={user} />
       </aside>
     </SidebarContext.Provider>

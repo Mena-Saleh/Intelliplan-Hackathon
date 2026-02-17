@@ -2,7 +2,7 @@
 import Sidebar from "@/src/components/sidebar";
 import { Bell, Check } from "lucide-react";
 import SidebarNav from "@/src/components/sidebar-nav";
-import { customers } from "@/src/data/mock-customer-data";
+import { Customer } from "@/src/types";
 
 const customer: Customer = {
   id: 1,
