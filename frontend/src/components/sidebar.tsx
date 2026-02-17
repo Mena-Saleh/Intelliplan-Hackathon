@@ -20,9 +20,7 @@ type Props = {
 
 export default function Sidebar({ children, user }: Props) {
   const [collapsed, setCollapsed] = useState(false);
-  const [phase, setPhase] = useState<"idle" | "expanding" | "collapsing">(
-    "idle",
-  );
+  const [phase, setPhase] = useState<"idle" | "expanding" | "collapsing">("idle");
 
   const collapse = useCallback(() => {
     setCollapsed(true);
@@ -81,11 +79,13 @@ export default function Sidebar({ children, user }: Props) {
     <SidebarContext.Provider value={contextValue}>
       <aside
         className={`group/sidebar
-          ${collapsed ? "w-14" : "w-80"} fixed top-0
-          left-0 isolate flex h-screen
-          flex-col overflow-hidden
-          border-r border-dark/10 bg-surface transition-all duration-300
-        `}
+    w-full bg-surface flex flex-col overflow-hidden
+    border-b border-dark/10
+    transition-all duration-300
+
+    lg:fixed lg:top-0 lg:left-0 lg:h-screen lg:border-b-0 lg:border-r
+    ${collapsed ? "lg:w-14" : "lg:w-80"}
+  `}
       >
         {/* Collapsed overlay — covers entire sidebar */}
         {collapsed && (
@@ -128,18 +128,18 @@ export default function Sidebar({ children, user }: Props) {
               type="button"
               aria-label="Collapse sidebar"
               className="
-        absolute right-2 top-2
-        rounded-lg p-2
-        transition-colors duration-200
-        hover:bg-neutral-600
-      "
+      hidden lg:block
+      absolute right-2 top-2
+      rounded-lg p-2
+      transition-colors duration-200
+      hover:bg-neutral-600
+    "
               style={{ cursor: "w-resize" }}
             >
               <PanelRightOpen className="transition-transform duration-200" />
             </button>
           )}
         </div>
-
         {/* Content */}
         {children}
 
