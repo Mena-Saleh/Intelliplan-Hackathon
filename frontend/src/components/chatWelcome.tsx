@@ -26,12 +26,12 @@ export default function ChatWelcome({ onNewChat }: ChatWelcomeProps) {
 
           <RequestButton
             action={onNewChat}
-            label="+ Start New Request"
-            styles="px-6"
+            label="Start New Request"
+            variant="mid"
+            className="mx-auto"
           />
         </div>
       </div>
     </>
   );
 }
-
