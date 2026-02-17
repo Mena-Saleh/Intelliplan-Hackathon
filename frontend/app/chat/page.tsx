@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Sidebar from "@/src/components/sidebar";
-import type { Chat } from "@/src/models/Chat";
+import type { Chat } from "@/src/types/Chat";
 import { MOCK_CHAT_DATA } from "@/src/data/mockChatData";
 import ChatWelcome from "@/src/components/chatWelcome";
 import ChatInput from "@/src/components/chatInput";
@@ -75,8 +75,8 @@ export default function ChatPage() {
                     <div
                       key={index}
                       className={`max-w-md w-fit whitespace-pre-line ${msg.role === "user"
-                          ? "ml-auto bg-primary text-white"
-                          : "bg-white"
+                        ? "ml-auto bg-primary text-white"
+                        : "bg-white"
                         } p-4 rounded-2xl shadow-sm border border-dark/10`}
                     >
                       {msg.content}
