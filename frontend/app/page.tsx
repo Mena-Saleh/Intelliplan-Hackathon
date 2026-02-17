@@ -1,9 +1,8 @@
 "use client";
-
 import Sidebar from "@/src/components/sidebar";
 import { Bell, Check } from "lucide-react";
 import SidebarNav from "@/src/components/sidebar-nav";
-import { Customer } from "@/src/types";
+import { customers } from "@/src/data/mock-customer-data";
 
 const customer: Customer = {
   id: 1,
@@ -14,6 +13,7 @@ const customer: Customer = {
     preferredConsultants: ["Hanna", "Kevin"],
   },
 };
+// const johan = customers.find(customer => customer.id === 1);
 
 export default function DashboardPage() {
   return (
