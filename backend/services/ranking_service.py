@@ -22,15 +22,6 @@ class RankingService:
 
         return available
 
-    def build_need_text(self, staffing_need):
-        parts = [
-            f"Department: {staffing_need.department}",
-            "Required competences:"
-        ]
-        parts.extend(staffing_need.required_competences)
-
-        return " ".join(parts)
-
     def compute_similarities(self, consultant, need_embedding):
         competence_text = " ".join(consultant.competences)
         competence_embedding = self.embedding_service.embed(competence_text)
@@ -59,7 +50,7 @@ class RankingService:
         )
 
     def assess_risk(self, competence_sim, experience_sim, urgency_level):
-        delta = 0 if urgency_level == "low" else 0.03 if urgency_level == "medium" else 0.06
+        delta = 0 if urgency_level == "low" else 0.01 if urgency_level == "medium" else 0.02
 
         if competence_sim < 0.5 + delta:
             return RiskAssessment(
@@ -84,12 +75,10 @@ class RankingService:
             reason="Strong competence and relevant experience"
         )
 
-    def get_recommendations(self, staffing_need, consultants, filter_availability=False):
+    def get_recommendations(self, staffing_need, consultants, filter_availability=False, top_k=-1):
         if filter_availability:
             consultants = self.filter_by_availability(consultants, staffing_need)
             
-        # need_text = self.build_need_text(staffing_need)
-        # need_embedding = self.embedding_service.embed(need_text)
         need_text = " ".join(staffing_need.required_competences)
         need_embedding = self.embedding_service.embed(need_text)
 
@@ -98,18 +87,15 @@ class RankingService:
         for consultant in consultants:
             comp_sim, exp_sim = self.compute_similarities(consultant, need_embedding)
             score = self.compute_score(comp_sim, exp_sim, consultant.rating)
-            risk = self.assess_risk(comp_sim, exp_sim, staffing_need.urgency_level)
+            # risk = self.assess_risk(comp_sim, exp_sim, staffing_need.urgency_level)
 
             results.append({
-                "id": consultant.id,
-                "rating": consultant.rating,
-                "competence_score": round(comp_sim, 4),
-                "experience_score": round(exp_sim, 4),
+                "consultant": consultant,
                 "total_score": round(score, 4),
-                "risk_level": risk.level,
-                "risk_reason": risk.reason,
-                "competences": consultant.competences
             })
 
         results.sort(key=lambda x: x["total_score"], reverse=True)
-        return results[:5]
+        if top_k > 0:
+            return results[:top_k]
+        
+        return results

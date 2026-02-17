@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Sidebar from "@/src/components/sidebar";
-import type { Chat } from "@/src/models/Chat";
+import type { Chat } from "@/src/types/Chat";
 import { MOCK_CHAT_DATA } from "@/src/data/mockChatData";
 import ChatWelcome from "@/src/components/chatWelcome";
 import ChatInput from "@/src/components/chatInput";

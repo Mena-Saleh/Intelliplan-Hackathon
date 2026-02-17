@@ -3,19 +3,7 @@
 import Sidebar from "@/src/components/sidebar";
 import { Bell, Check } from "lucide-react";
 import SidebarNav from "@/src/components/sidebar-nav";
-
-interface Customer {
-  id: number;
-  name: string;
-  role: string;
-  department: Department;
-}
-
-// TODO: Breakout consultant into an interface, create a list of said consultant here
-interface Department {
-  competences: string[];
-  preferredConsultants: string[];
-}
+import { Customer } from "@/src/types";
 
 const customer: Customer = {
   id: 1,
