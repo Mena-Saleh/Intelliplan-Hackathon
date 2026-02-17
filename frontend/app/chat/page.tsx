@@ -68,7 +68,7 @@ export default function ChatPage() {
         {/* EMPTY STATE */}
         {!activeChat ? (
           // value customers.name will come from the customer mock data file in /data
-          <ChatWelcome onNewChat={createNewChat} username={customers[3].name} />
+          <ChatWelcome onNewChat={createNewChat} username={customers[0].name} />
         ) : (
           <>
             {/* MESSAGES */}
