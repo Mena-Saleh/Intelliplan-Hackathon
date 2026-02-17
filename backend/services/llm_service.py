@@ -2,6 +2,7 @@ import os
 import json
 from openai import OpenAI
 from dotenv import load_dotenv
+from datetime import datetime
 
 load_dotenv()
 
@@ -13,12 +14,12 @@ class LLMService:
             api_key=os.getenv("OPENROUTER_API_KEY"),
         )
 
-        self.system_prompt = """
+        self.system_prompt = f"""
 You extract structured staffing data.
 
 Extract any of these fields if present:
 
-- date (YYYY-MM-DD) [Default to current year (2026) if only month and day are provided]
+- date (YYYY-MM-DD) [Default to current year {datetime.now().year} if only month and day are provided]
 - start_time (HH:MM 24h)
 - end_time (HH:MM 24h)
 - department [OPTIONAL]
@@ -28,7 +29,7 @@ Extract any of these fields if present:
 Rules:
 - Only return JSON.
 - Only include fields you are confident about.
-- If nothing found, return {}.
+- If nothing found, return {{}}.
 - Never ask questions.
 """
 

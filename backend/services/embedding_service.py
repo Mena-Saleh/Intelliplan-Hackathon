@@ -27,5 +27,14 @@ class EmbeddingService:
     def cosine_similarity(vec1: np.ndarray, vec2: np.ndarray) -> float:
         return float(np.dot(vec1, vec2))
 
+    @staticmethod
+    def l2_distance(vec1: np.ndarray, vec2: np.ndarray) -> float:
+        return float(np.linalg.norm(vec1 - vec2))
+
+    @staticmethod
+    def l1_distance(vec1: np.ndarray, vec2: np.ndarray) -> float:
+        return float(np.sum(np.abs(vec1 - vec2)))
+
+
 
 embedding_service = EmbeddingService()
