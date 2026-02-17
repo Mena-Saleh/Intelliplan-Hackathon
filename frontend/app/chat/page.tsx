@@ -8,6 +8,7 @@ import ChatWelcome from "@/src/components/chatWelcome";
 import ChatInput from "@/src/components/chatInput";
 import SidebarRequests from "@/src/components/sidebar-requests";
 import { Customer } from "@/src/types";
+import { customers } from "@/src/data/mock-customer-data";
 
 export default function ChatPage() {
   const [chats, setChats] = useState<Chat[]>([]);
@@ -15,7 +16,7 @@ export default function ChatPage() {
   const [input, setInput] = useState("");
 
   const activeChat = chats.find((c) => c.id === activeChatId);
- 
+
 
   // Creating a new chat. Id and time of creation is set here, and mock mesages are set in src/data/mockChatData.ts
   const createNewChat = () => {
@@ -67,7 +68,7 @@ export default function ChatPage() {
         {/* EMPTY STATE */}
         {!activeChat ? (
           // value customers.name will come from the customer mock data file in /data
-          <ChatWelcome onNewChat={createNewChat} username={customers.name} />
+          <ChatWelcome onNewChat={createNewChat} username={customers[3].name} />
         ) : (
           <>
             {/* MESSAGES */}
