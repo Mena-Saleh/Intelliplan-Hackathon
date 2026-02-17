@@ -7,10 +7,6 @@ import type { User } from "../types";
 import Logo from "./Logo";
 import UserCard from "./user-card";
 
-/*
- Animation duration must match Tailwind duration-300
- Single source of truth avoids desync bugs.
-*/
 const ANIMATION_MS = 300;
 
 type Props = {
@@ -40,10 +36,6 @@ export default function Sidebar({ children, user }: Props) {
     });
   }, []);
 
-  /*
-   Prevent label flicker:
-   text only appears AFTER expansion finishes
-  */
   useEffect(() => {
     if (phase === "idle") return;
 
@@ -51,10 +43,6 @@ export default function Sidebar({ children, user }: Props) {
     return () => clearTimeout(t);
   }, [phase]);
 
-  /*
-   Derived semantics.
-   Consumers rely on this instead of guessing.
-  */
   const contextValue = useMemo(() => {
     const isExpanded = !collapsed;
 
@@ -95,10 +83,9 @@ export default function Sidebar({ children, user }: Props) {
             className="
       absolute inset-0 z-30
       flex items-start justify-center
-      cursor-e-resize
       bg-transparent
       transition-colors duration-200
-      hover:bg-black/5
+      hover:bg-background
     "
           >
             {/* Reveal icon directly above logo */}
@@ -111,7 +98,7 @@ export default function Sidebar({ children, user }: Props) {
         group-hover/sidebar:translate-y-0
       "
             >
-              <PanelLeftOpen />
+              <PanelLeftOpen className="transition-transform duration-200 text-primary" />
             </span>
           </button>
         )}
@@ -131,11 +118,11 @@ export default function Sidebar({ children, user }: Props) {
       absolute right-2 top-2
       rounded-lg p-2
       transition-colors duration-200
-      hover:bg-neutral-600
+      hover:bg-background
     "
               style={{ cursor: "w-resize" }}
             >
-              <PanelRightOpen className="transition-transform duration-200" />
+              <PanelRightOpen className="transition-transform duration-200 text-primary" />
             </button>
           )}
         </div>
