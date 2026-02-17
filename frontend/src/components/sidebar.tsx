@@ -1,158 +1,151 @@
 "use client";
 
-import { LayoutDashboard, MessageSquare, Users, Clock } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import SidebarContext from "../contexts/sidebar-context";
+import { PanelLeftOpen, PanelRightOpen } from "lucide-react";
+import type { User } from "../types";
+import Logo from "./Logo";
+import UserCard from "./user-card";
 
-type SidebarVariant = "customer" | "manager" | "consultant";
+/*
+ Animation duration must match Tailwind duration-300
+ Single source of truth avoids desync bugs.
+*/
+const ANIMATION_MS = 300;
 
-type Chat = {
-	id: string;
-	title: string;
-	createdAt: Date;
+type Props = {
+  children: React.ReactNode;
+  user: User;
 };
 
-type SidebarProps = {
-	variant: SidebarVariant;
-	chats?: Chat[];
-	activeChatId?: string | null;
-	onNewChat?: () => void;
-	onSelectChat?: (id: string) => void;
-	user: {
-		name: string;
-		role: string;
-	};
-};
+export default function Sidebar({ children, user }: Props) {
+  const [collapsed, setCollapsed] = useState(false);
+  const [phase, setPhase] = useState<"idle" | "expanding" | "collapsing">(
+    "idle",
+  );
 
-export default function Sidebar({
-	variant,
-	chats = [],
-	activeChatId = null,
-	onNewChat,
-	onSelectChat,
-	user,
-}: SidebarProps) {
-	const pathname = usePathname();
+  const collapse = useCallback(() => {
+    setCollapsed(true);
+    setPhase("collapsing");
+  }, []);
 
-	const formatDate = (date: Date) =>
-		date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  const expand = useCallback(() => {
+    setCollapsed(false);
+    setPhase("expanding");
+  }, []);
 
-	const navConfig = {
-		manager: [
-			{ name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-		],
-		consultant: [
-			{ name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-			{ name: "Work History", href: "/history", icon: Clock },
-		],
-	};
+  const toggle = useCallback(() => {
+    setCollapsed((prev) => {
+      const next = !prev;
+      setPhase(next ? "collapsing" : "expanding");
+      return next;
+    });
+  }, []);
 
-	return (
-		<aside className="fixed top-0 left-0 h-screen w-80 bg-surface flex flex-col border-r border-dark/10">
-			
-			{/* ===== Logo ===== */}
-			<div className="leading-tight py-4 border-b border-dark/10 flex flex-col items-center">
-				<h1 className="font-heading text-xl">
-					<span className="text-primary">Intelli</span>
-					<span className="text-body">plan</span>
-				</h1>
-				<p className="text-xs text-body/50 tracking-wide">
-					AI-powered Staffing Portal
-				</p>
-			</div>
-		
-			{/* ========================= */}
-			{/* CUSTOMER SIDEBAR */}
-			{/* ========================= */}
-			{variant === "customer" && (
-				<>
-					<div className="px-4 py-4 border-b border-dark/10">
-						<button
-							onClick={onNewChat}
-							className="w-full bg-accent text-white py-3 rounded-xl font-medium hover:opacity-90 transition"
-						>
-							+ New Chat
-						</button>
-					</div>
+  /*
+   Prevent label flicker:
+   text only appears AFTER expansion finishes
+  */
+  useEffect(() => {
+    if (phase === "idle") return;
 
-					{chats.length === 0 ? (
-						<div className="flex-1 px-6 pt-8 text-center">
-							<p className="text-sm text-body/50">
-								No conversations yet. Start a new chat!
-							</p>
-						</div>
-					) : (
-						<div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
-							{chats.map((chat) => {
-								const isActive = activeChatId === chat.id;
+    const t = setTimeout(() => setPhase("idle"), ANIMATION_MS);
+    return () => clearTimeout(t);
+  }, [phase]);
 
-								return (
-									<div
-										key={chat.id}
-										onClick={() => onSelectChat?.(chat.id)}
-										className={`p-4 rounded-2xl cursor-pointer transition-all ${
-											isActive
-												? "bg-primary/10 shadow-sm"
-												: "hover:bg-black/5"
-										}`}
-									>
-										<div className="flex items-start gap-3">
-											<MessageSquare className="w-5 h-5 text-primary mt-1" />
-											<div>
-												<p className="font-semibold">
-													{chat.title}
-												</p>
-												<div className="flex items-center gap-2 text-xs text-body/50 mt-1">
-													<Clock className="w-3 h-3" />
-													{formatDate(chat.createdAt)}
-												</div>
-											</div>
-										</div>
-									</div>
-								);
-							})}
-						</div>
-					)}
-				</>
-			)}
-			{/* ========================= */}
-			{/* MANAGER / CONSULTANT NAV */}
-			{/* ========================= */}
-			{variant !== "customer" && (
-				<div className="space-y-2 px-4 mt-4 flex-1">
-					{navConfig[variant].map((item) => {
-						const isActive = pathname.startsWith(item.href);
-						const Icon = item.icon;
+  /*
+   Derived semantics.
+   Consumers rely on this instead of guessing.
+  */
+  const contextValue = useMemo(() => {
+    const isExpanded = !collapsed;
 
-						return (
-							<Link
-								key={item.name}
-								href={item.href}
-								className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
-									isActive
-										? "bg-primary/10 text-primary shadow-sm"
-										: "text-body hover:bg-black/5 hover:text-primary"
-								}`}
-							>
-								<Icon className="w-5 h-5 shrink-0" />
-								<span className="font-medium">{item.name}</span>
-							</Link>
-						);
-					})}
-				</div>
-			)}
-			{/* ===== Bottom User Section ===== */}
-			<div className="border-t border-dark/10 p-4">
-				<div className="flex items-center gap-3">
-					<div className="bg-primary/10 text-primary p-2 rounded-full">
-						<Users className="w-5 h-5" />
-					</div>
-					<div>
-						<p className="text-sm font-semibold">{user.name}</p>
-						<p className="text-xs text-body/50">{user.role}</p>
-					</div>
-				</div>
-			</div>
-		</aside>
-	);
+    return {
+      collapsed,
+      isExpanded,
+
+      toggle,
+      expand,
+      collapse,
+
+      phase,
+
+      // behavioral semantics
+      showText: isExpanded && phase !== "collapsing",
+      showTooltip: collapsed,
+      iconOnly: collapsed,
+    };
+  }, [collapsed, phase, expand, collapse, toggle]);
+
+  return (
+    <SidebarContext.Provider value={contextValue}>
+      <aside
+        className={`group/sidebar
+          ${collapsed ? "w-14" : "w-80"} fixed top-0
+          left-0 isolate flex h-screen
+          flex-col overflow-hidden
+          border-r border-dark/10 bg-surface transition-all duration-300
+        `}
+      >
+        {/* Collapsed overlay — covers entire sidebar */}
+        {collapsed && (
+          <button
+            onClick={toggle}
+            type="button"
+            aria-label="Expand sidebar"
+            className="
+      absolute inset-0 z-30
+      flex items-start justify-center
+      cursor-e-resize
+      bg-transparent
+      transition-colors duration-200
+      hover:bg-black/5
+    "
+          >
+            {/* Reveal icon directly above logo */}
+            <span
+              className="
+        mt-3 rounded-lg bg-surface p-2 shadow-sm
+        opacity-0 -translate-y-1
+        transition-all duration-200
+        group-hover/sidebar:opacity-100
+        group-hover/sidebar:translate-y-0
+      "
+            >
+              <PanelLeftOpen />
+            </span>
+          </button>
+        )}
+
+        {/* Header content */}
+        <div className="relative flex items-center justify-center border-b border-dark/10 p-2">
+          <Logo />
+
+          {/* Visible toggle when expanded */}
+          {!collapsed && (
+            <button
+              onClick={toggle}
+              type="button"
+              aria-label="Collapse sidebar"
+              className="
+        absolute right-2 top-2
+        rounded-lg p-2
+        transition-colors duration-200
+        hover:bg-neutral-600
+      "
+              style={{ cursor: "w-resize" }}
+            >
+              <PanelRightOpen className="transition-transform duration-200" />
+            </button>
+          )}
+        </div>
+
+        {/* Content */}
+        {children}
+
+        {/* Footer */}
+        <UserCard user={user} />
+      </aside>
+    </SidebarContext.Provider>
+  );
 }
