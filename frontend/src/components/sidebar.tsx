@@ -140,13 +140,11 @@ export default function Sidebar({ children, user }: Props) {
           )}
         </div>
 
-        <div className="z-99999 h-full">
-          {/* Content */}
-          {children}
+        {/* Content */}
+        {children}
 
-          {/* Footer */}
-          <UserCard user={user} />
-        </div>
+        {/* Footer */}
+        <UserCard user={user} />
       </aside>
     </SidebarContext.Provider>
   );

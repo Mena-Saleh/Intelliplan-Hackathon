@@ -28,7 +28,7 @@ export default function SidebarRequest({
     <>
       {/* New request button */}
       <div
-        className={`border-b border-dark/10 ${compact ? "p-2" : "px-4 py-4"}`}
+        className={`border-b border-dark/10 ${compact ? "p-2" : "px-4 py-4"} z-9999`}
       >
         <RequestButton
           action={onNewChat}

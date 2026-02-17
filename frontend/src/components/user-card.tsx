@@ -10,7 +10,7 @@ export default function UserCard({ user }: { user: User }) {
   const compact = collapsed || phase === "collapsing";
 
   return (
-    <div className="border-t border-dark/10 p-2">
+    <div className="border-t border-dark/10 p-2 z-999">
       <div
         className={`
           flex items-center rounded-xl transition-all duration-200
