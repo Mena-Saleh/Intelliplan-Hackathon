@@ -7,7 +7,7 @@ export default function Logo() {
   const { showText, showTooltip, iconOnly } = useSidebar();
 
   return (
-    <div className="leading-tight py-4 flex flex-col items-center">
+    <div className="leading-tight py-4 flex flex-col items-start">
       {iconOnly ? (
         <h1
           aria-label="Intelliplan AI-powered Staffing Portal"

@@ -10,8 +10,8 @@ import UserCard from "./user-card";
 const ANIMATION_MS = 300;
 
 type Props = {
-  children: React.ReactNode;
-  user: User;
+	children: React.ReactNode;
+	user: User;
 };
 
 export default function Sidebar({ children, user }: Props) {
@@ -39,9 +39,9 @@ export default function Sidebar({ children, user }: Props) {
   useEffect(() => {
     if (phase === "idle") return;
 
-    const t = setTimeout(() => setPhase("idle"), ANIMATION_MS);
-    return () => clearTimeout(t);
-  }, [phase]);
+		const t = setTimeout(() => setPhase("idle"), ANIMATION_MS);
+		return () => clearTimeout(t);
+	}, [phase]);
 
   const contextValue = useMemo(() => {
     const isExpanded = !collapsed;
@@ -87,10 +87,10 @@ export default function Sidebar({ children, user }: Props) {
       transition-colors duration-200
       hover:bg-background
     "
-          >
-            {/* Reveal icon directly above logo */}
-            <span
-              className="
+					>
+						{/* Reveal icon directly above logo */}
+						<span
+							className="
         mt-3 rounded-lg bg-surface p-2 shadow-sm
         opacity-0 -translate-y-1
         transition-all duration-200
@@ -120,7 +120,7 @@ export default function Sidebar({ children, user }: Props) {
       transition-colors duration-200
       hover:bg-background
     "
-              style={{ cursor: "w-resize" }}
+              
             >
               <PanelRightOpen className="transition-transform duration-200 text-primary" />
             </button>
