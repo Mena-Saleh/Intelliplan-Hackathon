@@ -1,4 +1,4 @@
-import { Chat } from "../models/Chat";
+import { Chat } from "../types/Chat";
 
 
 // Omitting id and time of creation since it is set when the object is created in page
