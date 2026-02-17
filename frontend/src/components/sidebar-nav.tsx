@@ -17,7 +17,7 @@ export default function SidebarNav({ variant }: { variant: string }) {
   };
 
   return (
-    <div className="space-y-2 px-4 mt-4 flex-1">
+    <div className="mt-4 px-4 flex-1 lg:flex-none">
       {navConfig[variant].map((item) => {
         const isActive = pathname.startsWith(item.href);
         const Icon = item.icon;

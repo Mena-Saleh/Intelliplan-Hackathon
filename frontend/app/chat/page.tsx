@@ -33,16 +33,16 @@ export default function ChatPage() {
     const updatedChats = chats.map((chat) =>
       chat.id === activeChat.id
         ? {
-          ...chat,
-          messages: [
-            ...chat.messages,
-            {
-              role: "user",
-              type: "text",
-              content: input,
-            },
-          ],
-        }
+            ...chat,
+            messages: [
+              ...chat.messages,
+              {
+                role: "user",
+                type: "text",
+                content: input,
+              },
+            ],
+          }
         : chat,
     );
 
@@ -51,7 +51,7 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-background">
       <Sidebar user={{ name: "Johan Andersson", role: "Warehouse AB" }}>
         <SidebarRequests
           activeChatId={activeChatId}
@@ -61,23 +61,22 @@ export default function ChatPage() {
         />
       </Sidebar>
 
-      <main className="ml-80 flex-1 flex flex-col">
+      <main className="flex-1 flex flex-col lg:ml-80 min-h-0">
         {/* EMPTY STATE */}
         {!activeChat ? (
           <ChatWelcome onNewChat={createNewChat} />
         ) : (
           <>
             {/* MESSAGES */}
-            <div className="flex-1 overflow-y-auto px-12 py-8 space-y-6 pb-32">
+            <div className="flex-1 min-h-0 overflow-y-auto px-4 md:px-8 lg:px-12 py-6 lg:py-8 space-y-6 pb-8">
               {activeChat.messages.map((msg, index) => {
                 if (msg.type === "text") {
                   return (
                     <div
                       key={index}
-                      className={`max-w-md w-fit whitespace-pre-line ${msg.role === "user"
-                          ? "ml-auto bg-primary text-white"
-                          : "bg-white"
-                        } p-4 rounded-2xl shadow-sm border border-dark/10`}
+                      className={`max-w-md w-fit whitespace-pre-line ${
+                        msg.role === "user" ? "ml-auto bg-primary text-white" : "bg-white"
+                      } p-4 rounded-2xl shadow-sm border border-dark/10`}
                     >
                       {msg.content}
                     </div>
