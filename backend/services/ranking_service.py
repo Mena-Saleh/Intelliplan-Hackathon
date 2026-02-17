@@ -75,7 +75,7 @@ class RankingService:
             reason="Strong competence and relevant experience"
         )
 
-    def get_recommendations(self, staffing_need, consultants, filter_availability=False):
+    def get_recommendations(self, staffing_need, consultants, filter_availability=False, top_k=-1):
         if filter_availability:
             consultants = self.filter_by_availability(consultants, staffing_need)
             
@@ -87,18 +87,15 @@ class RankingService:
         for consultant in consultants:
             comp_sim, exp_sim = self.compute_similarities(consultant, need_embedding)
             score = self.compute_score(comp_sim, exp_sim, consultant.rating)
-            risk = self.assess_risk(comp_sim, exp_sim, staffing_need.urgency_level)
+            # risk = self.assess_risk(comp_sim, exp_sim, staffing_need.urgency_level)
 
             results.append({
-                "id": consultant.id,
-                "rating": consultant.rating,
-                "competence_score": round(comp_sim, 4),
-                "experience_score": round(exp_sim, 4),
+                "consultant": consultant,
                 "total_score": round(score, 4),
-                "risk_level": risk.level,
-                "risk_reason": risk.reason,
-                "competences": consultant.competences
             })
 
         results.sort(key=lambda x: x["total_score"], reverse=True)
-        return results[:5]
+        if top_k > 0:
+            return results[:top_k]
+        
+        return results

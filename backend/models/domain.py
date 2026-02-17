@@ -39,8 +39,6 @@ class Booking(BaseModel):
 
 class RiskAssessment(BaseModel):
     level: Literal["LOW", "MEDIUM", "HIGH"]
-    competence_similarity: float
-    experience_similarity: float
     reason: str
 
 class Recommendation(BaseModel):
