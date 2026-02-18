@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import Sidebar from "@/src/components/sidebar";
-import type { Chat } from "@/src/types/Chat";
-import ChatWelcome from "@/src/components/chatWelcome";
-import ChatInput from "@/src/components/chatInput";
+import type { Chat } from "@/src/types/chatTemp";
+import ChatWelcome from "@/src/components/chat-welcome";
+import ChatInput from "@/src/components/chat-input";
 import SidebarRequests from "@/src/components/sidebar-requests";
 import { customers } from "@/src/data/mock-customer-data";
-import { fastApiService } from "@/src/services/fastApiService";
+import { fastApiService } from "@/src/services/fast-api-service";
 import { getDisplayName } from "@/src/utils/getDisplayName";
 import { Star } from "lucide-react";
 import { useRef, useEffect } from "react";
