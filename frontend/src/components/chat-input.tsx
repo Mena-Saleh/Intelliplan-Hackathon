@@ -2,14 +2,13 @@
 
 import { Send } from "lucide-react";
 
-// Value is setInput, onChange is e.target.value and onSend is sendMessage array function in chat/page
-interface ChatInputProps {
+interface TProps {
   value: string;
   onChange: (value: string) => void;
   onSend: () => void;
 }
 
-export default function ChatInput({ value, onChange, onSend }: ChatInputProps) {
+export default function ChatInput({ value, onChange, onSend }: TProps) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();

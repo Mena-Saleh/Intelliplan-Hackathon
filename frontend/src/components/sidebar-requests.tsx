@@ -1,84 +1,47 @@
 "use client";
 
 import { Clock, MessageSquare } from "lucide-react";
-import type { Chat } from "../types";
+import type { TChat } from "@/src/types/chat";
 import RequestButton from "./request-button";
-import { useSidebar } from "../contexts/sidebar-context";
+import { formatDate } from "@/src/utils/format-date";
 
-type RequestProps = {
+type TProps = {
   activeChatId?: string | null;
-  chats: Chat[];
+  chats: TChat[];
   onNewChat: () => void;
   onSelectChat: (id: string) => void;
 };
 
-const formatDate = (date: Date) =>
-  date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-
-export default function SidebarRequest({
-  activeChatId = null,
-  onNewChat,
-  chats,
-  onSelectChat,
-}: RequestProps) {
-  const { collapsed, phase, showTooltip } = useSidebar();
-  const compact = collapsed || phase === "collapsing";
+export default function SidebarRequest({ activeChatId = null, onNewChat, chats, onSelectChat }: TProps) {
 
   return (
     <>
-      {/* New request button */}
       <div
-        className={`border-b border-dark/10 ${compact ? "p-2" : "px-4 py-4"} z-9999`}
+        className={`border-b border-dark/10 px-4 py-4 z-9999`}
       >
         <RequestButton
           action={onNewChat}
-          variant={compact ? "compact" : "full"}
+          variant={"full"}
         />
       </div>
 
       {chats.length === 0 ? (
-        !compact && (
-          <div className="flex-1 px-6 pt-8 text-center">
-            <p className="text-sm text-body/50">
-              No conversations yet. Start a new chat!
-            </p>
-          </div>
-        )
+        <div className="flex-1 px-6 pt-8 text-center">
+          <p className="text-sm text-body/50">
+            No conversations yet. Start a new chat!
+          </p>
+        </div>
+
       ) : (
         <div
           className={`
-            flex-1 overflow-y-auto
-            ${compact ? "flex flex-col items-center gap-2 py-3" : "space-y-3 px-4 py-4"}
+            flex-1 overflow-y-auto space-y-3 px-4 py-4
           `}
         >
           {chats.map((chat) => {
             const isActive = activeChatId === chat.id;
 
-            if (compact) {
-              // --- COLLAPSED: icon rail ---
-              return (
-                <button
-                  type="button"
-                  key={chat.id}
-                  onClick={() => onSelectChat(chat.id)}
-                  title={
-                    showTooltip
-                      ? `${chat.title} • ${formatDate(chat.createdAt)}`
-                      : undefined
-                  }
-                  aria-label={showTooltip ? chat.title : undefined}
-                  className={`
-                    relative flex h-10 w-10 items-center justify-center rounded-xl
-                    transition-all
-                    ${isActive ? "bg-primary/15 text-primary" : "hover:bg-black/5"}
-                  `}
-                >
-                  <MessageSquare className="h-5 w-5" />
-                </button>
-              );
-            }
 
-            // --- EXPANDED: full cards ---
             return (
               <div
                 key={chat.id}

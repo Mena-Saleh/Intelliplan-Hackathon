@@ -1,35 +1,27 @@
 "use client";
 
 import { Users } from "lucide-react";
-import type { User } from "../types";
-import { useSidebar } from "../contexts/sidebar-context";
+import type { TUser } from "../types";
 
-export default function UserCard({ user }: { user: User }) {
-  const { collapsed, phase } = useSidebar();
-
-  const compact = collapsed || phase === "collapsing";
+export default function UserCard({ user }: { user: TUser }) {
 
   return (
     <div className="border-t border-dark/10 p-2 z-999 mt-auto">
       <div
         className={`
-          flex items-center rounded-xl transition-all duration-200
-          ${compact ? "justify-center p-2" : "gap-3 p-2"}
+          flex items-center rounded-xl transition-all duration-200 gap-3 p-2
         `}
-        title={compact ? `${user.name} (${user.role})` : undefined}
+        title={`${user.name} (${user.role})`}
       >
-        {/* Avatar */}
         <div className="bg-primary/10 text-primary p-2 rounded-full shrink-0">
           <Users className="w-5 h-5" />
         </div>
 
-        {/* Identity text only in expanded mode */}
-        {!compact && (
-          <div className="leading-tight">
-            <p className="text-sm font-semibold whitespace-nowrap">{user.name}</p>
-            <p className="text-xs text-body/50 whitespace-nowrap">{user.role}</p>
-          </div>
-        )}
+        <div className="leading-tight">
+          <p className="text-sm font-semibold whitespace-nowrap">{user.name}</p>
+          <p className="text-xs text-body/50 whitespace-nowrap">{user.role}</p>
+        </div>
+
       </div>
     </div>
   );

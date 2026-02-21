@@ -1,10 +1,10 @@
 import axios, { AxiosInstance } from "axios"
 import {
-    StaffingNeed,
-    RecommendResponse,
-    ChatRequest,
-    ChatResponse,
-} from "../types/staffing"
+    TStaffingNeed,
+    TRecommendResponse,
+    TChatRequest,
+    TChatResponse,
+} from "../types/api"
 
 class FastApiService {
     private api: AxiosInstance
@@ -18,18 +18,16 @@ class FastApiService {
         })
     }
 
-    // Recommend
-    async recommend(staffingNeed: StaffingNeed): Promise<RecommendResponse> {
-        const response = await this.api.post<RecommendResponse>(
+    async recommend(staffingNeed: TStaffingNeed): Promise<TRecommendResponse> {
+        const response = await this.api.post<TRecommendResponse>(
             "/recommend/",
             staffingNeed
         )
         return response.data
     }
 
-    // Chat
-    async chat(request: ChatRequest): Promise<ChatResponse> {
-        const response = await this.api.post<ChatResponse>(
+    async chat(request: TChatRequest): Promise<TChatResponse> {
+        const response = await this.api.post<TChatResponse>(
             "/chat/",
             request
         )

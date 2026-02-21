@@ -1,6 +1,6 @@
-import { Customer } from '../types/index';
+import { TCustomer } from '../types/index';
 
-export const customers: Customer[] = [
+export const customers: TCustomer[] = [
     {
         id: 1,
         name: "Johan Andersson",
@@ -33,7 +33,7 @@ export const customers: Customer[] = [
         name: "Klara Vindter",
         role: "Get Well AB",
         department: {
-            competences: ["master degree", "work experience", "licence" ],
+            competences: ["master degree", "work experience", "licence"],
             preferredConsultants: ["Lars"],
         },
     },
@@ -91,5 +91,5 @@ export const customers: Customer[] = [
             preferredConsultants: ["Harry"],
         },
     },
-    
+
 ]

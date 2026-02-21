@@ -287,10 +287,10 @@ export default function DashboardPage() {
                       {/* Risk Badge */}
                       <span
                         className={`flex items-center gap-2 text-xs px-3 py-1 rounded-full ${c.risk === "low"
-                            ? "bg-[#4DD07D]/15 text-[#4DD07D]"
-                            : c.risk === "medium"
-                              ? "bg-[#F7B23B]/15 text-[#F7B23B]"
-                              : "bg-[#F26969]/15 text-[#F26969]"
+                          ? "bg-[#4DD07D]/15 text-[#4DD07D]"
+                          : c.risk === "medium"
+                            ? "bg-[#F7B23B]/15 text-[#F7B23B]"
+                            : "bg-[#F26969]/15 text-[#F26969]"
                           }`}
                       >
                         {c.risk === "low" && (
@@ -365,10 +365,10 @@ export default function DashboardPage() {
 
                   <span
                     className={`flex items-center gap-2 whitespace-nowrap text-sm px-4 py-1.5 rounded-full font-medium ${r.status === "approved"
-                        ? "bg-[#4DD07D]/15 text-[#4DD07D]"
-                        : r.status === "rejected"
-                          ? "bg-[#F26969]/15 text-[#F26969]"
-                          : "bg-[#F7B23B]/15 text-[#F7B23B]"
+                      ? "bg-[#4DD07D]/15 text-[#4DD07D]"
+                      : r.status === "rejected"
+                        ? "bg-[#F26969]/15 text-[#F26969]"
+                        : "bg-[#F7B23B]/15 text-[#F7B23B]"
                       }`}
                   >
                     {r.status === "approved" && (

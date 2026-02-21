@@ -1,139 +1,36 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
-import SidebarContext from "../contexts/sidebar-context";
-import { PanelLeftOpen, PanelRightOpen } from "lucide-react";
-import type { User } from "../types";
-import Logo from "./Logo";
+import type { TUser } from "../types";
+import Logo from "./logo";
 import UserCard from "./user-card";
 
-const ANIMATION_MS = 300;
-
-type Props = {
-	children: React.ReactNode;
-	user: User;
+type TProps = {
+  children: React.ReactNode;
+  user: TUser;
 };
 
-export default function Sidebar({ children, user }: Props) {
-  const [collapsed, setCollapsed] = useState(false);
-  const [phase, setPhase] = useState<"idle" | "expanding" | "collapsing">("idle");
-
-  const collapse = useCallback(() => {
-    setCollapsed(true);
-    setPhase("collapsing");
-  }, []);
-
-  const expand = useCallback(() => {
-    setCollapsed(false);
-    setPhase("expanding");
-  }, []);
-
-  const toggle = useCallback(() => {
-    setCollapsed((prev) => {
-      const next = !prev;
-      setPhase(next ? "collapsing" : "expanding");
-      return next;
-    });
-  }, []);
-
-  useEffect(() => {
-    if (phase === "idle") return;
-
-		const t = setTimeout(() => setPhase("idle"), ANIMATION_MS);
-		return () => clearTimeout(t);
-	}, [phase]);
-
-  const contextValue = useMemo(() => {
-    const isExpanded = !collapsed;
-
-    return {
-      collapsed,
-      isExpanded,
-
-      toggle,
-      expand,
-      collapse,
-
-      phase,
-
-      // behavioral semantics
-      showText: isExpanded && phase !== "collapsing",
-      showTooltip: collapsed,
-      iconOnly: collapsed,
-    };
-  }, [collapsed, phase, expand, collapse, toggle]);
-
+export default function Sidebar({ children, user }: TProps) {
   return (
-    <SidebarContext.Provider value={contextValue}>
-      <aside
-        className={`group/sidebar
-    w-full bg-surface flex flex-col overflow-hidden
-    border-b border-dark/10
-    transition-all duration-300
-    lg:fixed lg:top-0 lg:left-0 lg:h-screen lg:border-b-0 lg:border-r
-    ${collapsed ? "lg:w-14" : "lg:w-80"}
-  `}
-      >
-        {/* Collapsed overlay — covers entire sidebar */}
-        {collapsed && (
-          <button
-            onClick={toggle}
-            type="button"
-            aria-label="Expand sidebar"
-            className="
-      absolute inset-0 z-30
-      flex items-start justify-center
-      bg-transparent
-      transition-colors duration-200
-      hover:bg-background
-    "
-					>
-						{/* Reveal icon directly above logo */}
-						<span
-							className="
-        mt-3 rounded-lg bg-surface p-2 shadow-sm
-        opacity-0 -translate-y-1
-        transition-all duration-200
-        group-hover/sidebar:opacity-100
-        group-hover/sidebar:translate-y-0
+    <aside
+      className="
+        w-full bg-surface flex flex-col
+        border-b border-dark/10
+        lg:fixed lg:top-0 lg:left-0
+        lg:h-screen lg:w-80
+        lg:border-b-0 lg:border-r
       "
-            >
-              <PanelLeftOpen className="transition-transform duration-200 text-primary" />
-            </span>
-          </button>
-        )}
+    >
+      <div className="flex items-center justify-center border-b border-dark/10 p-4">
+        <Logo />
+      </div>
 
-        {/* Header content */}
-        <div className="relative flex items-center justify-center border-b border-dark/10 p-2">
-          <Logo />
-
-          {/* Visible toggle when expanded */}
-          {!collapsed && (
-            <button
-              onClick={toggle}
-              type="button"
-              aria-label="Collapse sidebar"
-              className="
-      hidden lg:block
-      absolute right-2 top-2
-      rounded-lg p-2
-      transition-colors duration-200
-      hover:bg-background
-    "
-              
-            >
-              <PanelRightOpen className="transition-transform duration-200 text-primary" />
-            </button>
-          )}
-        </div>
-
-        {/* Content */}
+      <div className="flex-1 overflow-y-auto">
         {children}
+      </div>
 
-        {/* Footer */}
-
+      <div className="border-t border-dark/10">
         <UserCard user={user} />
-      </aside>
-    </SidebarContext.Provider>
+      </div>
+    </aside>
   );
 }

@@ -1,16 +1,16 @@
-export type RiskLevel = "LOW" | "MEDIUM" | "HIGH";
+export type TRiskLevel = "LOW" | "MEDIUM" | "HIGH";
 
-export type MatchCandidate = {
+export type TMatchCandidate = {
     id: string;
     name: string;
     rating?: number | null;
-    risk: RiskLevel;
+    risk: TRiskLevel;
     riskReason: string;
     competences: string[];
     customerExperience: string[];
 };
 
-export type Message =
+export type TMessage =
     | {
         role: "bot" | "user";
         type: "text";
@@ -24,13 +24,13 @@ export type Message =
     | {
         role: "bot";
         type: "match";
-        candidates: MatchCandidate[];
+        candidates: TMatchCandidate[];
     };
 
-export type Chat = {
+export type TChat = {
     id: string;
     title: string;
     createdAt: Date;
-    messages: Message[];
+    messages: TMessage[];
     sessionId?: string;
 };

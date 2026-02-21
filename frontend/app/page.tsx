@@ -2,9 +2,9 @@
 import Sidebar from "@/src/components/sidebar";
 import { Bell, Check } from "lucide-react";
 import SidebarNav from "@/src/components/sidebar-nav";
-import { Customer } from "@/src/types";
+import { TCustomer } from "@/src/types";
 
-const customer: Customer = {
+const customer: TCustomer = {
   id: 1,
   name: "Johan Andersson",
   role: "Warehouse AB",

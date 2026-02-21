@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import Sidebar from "@/src/components/sidebar";
-import type { Chat } from "@/src/types/chatTemp";
+import type { Chat } from "@/src/types/chat";
 import ChatWelcome from "@/src/components/chat-welcome";
 import ChatInput from "@/src/components/chat-input";
 import SidebarRequests from "@/src/components/sidebar-requests";
 import { customers } from "@/src/data/mock-customer-data";
 import { fastApiService } from "@/src/services/fast-api-service";
-import { getDisplayName } from "@/src/utils/getDisplayName";
+import { getMockupDisplayName } from "@/src/utils/get-mockup-display-name";
 import { Star } from "lucide-react";
 import { useRef, useEffect } from "react";
 
@@ -245,7 +245,7 @@ export default function ChatPage() {
                             <div className="flex justify-between items-start">
                               <div>
                                 <p className="font-medium text-lg">
-                                  {getDisplayName(candidate.id)}
+                                  {getMockupDisplayName(candidate.id)}
                                 </p>
 
                                 {candidate.rating && (

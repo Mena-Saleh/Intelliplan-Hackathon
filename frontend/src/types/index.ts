@@ -1,21 +1,15 @@
-// export type Chat = {
-//   id: string;
-//   title: string;
-//   createdAt: Date;
-// };
-
-export interface User {
+export interface TUser {
   name: string;
   role: string;
 }
-export interface Customer {
+export interface TCustomer {
   id: number;
   name: string;
   role: string;
-  department: Department;
+  department: TDepartment;
 }
 
-export interface Department {
+export interface TDepartment {
   competences: string[];
   preferredConsultants: string[];
 }

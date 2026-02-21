@@ -1,4 +1,4 @@
-const FAKE_NAMES = [
+const MOCKUP_NAMES = [
     "Erik Svensson",
     "Ahmed Hassan",
     "Lukas Berg",
@@ -11,10 +11,10 @@ const FAKE_NAMES = [
     "Daniel Ekström",
 ];
 
-export const getDisplayName = (id: string) => {
+export const getMockupDisplayName = (id: string) => {
     const index = Math.abs(
         id.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0)
-    ) % FAKE_NAMES.length;
+    ) % MOCKUP_NAMES.length;
 
-    return FAKE_NAMES[index];
+    return MOCKUP_NAMES[index];
 };

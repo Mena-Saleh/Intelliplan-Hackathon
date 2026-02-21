@@ -32,7 +32,7 @@ def chat(request: ChatRequest):
         return {
             "status": "new_session",
             "session_id": session_id,
-            "assistant_message": "Hello There, I'm here to help with your staffing request. What do you need help with?"
+            "assistant_message": "Hello there, I'm here to help with your staffing request. What do you need help with?"
         }
 
     session = session_service.get_session(request.session_id)
