@@ -1,5 +1,5 @@
-from backend.models.domain import RiskAssessment
-from backend.services.embedding_service import EmbeddingService
+from intelliplanApi.models.domain import RiskAssessment
+from intelliplanApi.services.embedding_service import EmbeddingService
 
 
 class RankingService:

@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
-from backend.main import app
-from backend.data.mocked_data import staffing_needs
+from intelliplanApi.main import app
+from intelliplanApi.data.mocked_data import staffing_needs
 
 def test_all_staffing_needs():
     with TestClient(app) as client:

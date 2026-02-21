@@ -1,5 +1,5 @@
 from datetime import date, time
-from backend.models.domain import Consultant, Customer, StaffingNeed, Availability, TimeSlot
+from intelliplanApi.models.domain import Consultant, Customer, StaffingNeed, Availability, TimeSlot
 
 # CONSULTANTS
 consultants = [

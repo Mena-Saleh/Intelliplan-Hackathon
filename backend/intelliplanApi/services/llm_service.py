@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from datetime import datetime
 
 from sympy import content
-from backend.models.domain import RiskAssessment
+from intelliplanApi.models.domain import RiskAssessment
 
 load_dotenv()
 

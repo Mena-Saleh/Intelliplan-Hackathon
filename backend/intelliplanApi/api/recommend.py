@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from backend.models.domain import StaffingNeed
-from backend.services.embedding_service import embedding_service
-from backend.services.ranking_service import RankingService
-from backend.data.mocked_data import consultants
-from backend.services.llm_service import LLMService
+from intelliplanApi.models.domain import StaffingNeed
+from intelliplanApi.services.embedding_service import embedding_service
+from intelliplanApi.services.ranking_service import RankingService
+from intelliplanApi.data.mocked_data import consultants
+from intelliplanApi.services.llm_service import LLMService
 
 recommend_router = APIRouter()
 llm_service = LLMService()

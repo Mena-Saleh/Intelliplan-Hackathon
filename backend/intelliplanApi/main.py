@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
-from backend.services.embedding_service import embedding_service
-from backend.api.recommend import recommend_router
-from backend.api.chat import chat_router
+from intelliplanApi.services.embedding_service import embedding_service
+from intelliplanApi.api.recommend import recommend_router
+from intelliplanApi.api.chat import chat_router
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 load_dotenv()

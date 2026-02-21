@@ -2,8 +2,8 @@ from fastapi import APIRouter, HTTPException
 from httpcore import request
 from pydantic import BaseModel
 from requests import session
-from backend.services.llm_service import LLMService
-from backend.services.session_service import SessionService
+from intelliplanApi.services.llm_service import LLMService
+from intelliplanApi.services.session_service import SessionService
 
 chat_router = APIRouter()
 
