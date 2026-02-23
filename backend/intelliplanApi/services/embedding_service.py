@@ -1,16 +1,13 @@
 from sentence_transformers import SentenceTransformer
 import numpy as np
-import torch
-import gc
 
 class EmbeddingService:
     
     def __init__(self):
         self.model: SentenceTransformer | None = None
-
+    
     def load_model(self):
         if self.model is None:
-            # self.model = SentenceTransformer("all-mpnet-base-v2")
             self.model = SentenceTransformer("BAAI/bge-large-en-v1.5")
 
     def embed(self, text: str) -> np.ndarray:

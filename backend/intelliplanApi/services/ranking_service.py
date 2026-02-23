@@ -1,3 +1,4 @@
+from intelliplanApi.services.embedding_cache_service import EmbeddingCacheService
 from intelliplanApi.models.domain import RiskAssessment
 from intelliplanApi.services.embedding_service import EmbeddingService
 
@@ -6,7 +7,8 @@ class RankingService:
 
     def __init__(self, embedding_service: EmbeddingService):
         self.embedding_service = embedding_service
-
+        self.embedding_cache_service = EmbeddingCacheService(self.embedding_service)
+    
     def filter_by_availability(self, consultants, staffing_need):
         available = []
         weekday = staffing_need.date.strftime("%A")
@@ -23,23 +25,33 @@ class RankingService:
         return available
 
     def compute_similarities(self, consultant, need_embedding):
-        competence_text = " ".join(consultant.competences)
-        competence_embedding = self.embedding_service.embed(competence_text)
-
-        competence_similarity = self.embedding_service.cosine_similarity(
-            need_embedding, competence_embedding
-        )
-
-        if consultant.customer_experience:
-            exp_text = " ".join(consultant.customer_experience)
-            exp_embedding = self.embedding_service.embed(exp_text)
-            experience_similarity = self.embedding_service.cosine_similarity(
-                need_embedding, exp_embedding
-            )
-        else:
-            experience_similarity = 0.0
-
-        return competence_similarity, experience_similarity
+     comp_text = " ".join(consultant.competences)
+     comp_embedding = self.embedding_cache_service.get_embedding(
+         consultant.id,
+         "competences",
+         comp_text,
+     )
+    
+     competence_similarity = self.embedding_service.cosine_similarity(
+         need_embedding,
+         comp_embedding,
+     )
+    
+     experience_similarity = 0.0
+     if consultant.customer_experience:
+         exp_text = " ".join(consultant.customer_experience)
+         exp_embedding = self.embedding_cache_service.get_embedding(
+             consultant.id,
+             "customer_experience",
+             exp_text,
+         )
+    
+         experience_similarity = self.embedding_service.cosine_similarity(
+             need_embedding,
+             exp_embedding,
+         )
+    
+     return competence_similarity, experience_similarity
 
     def compute_score(self, competence_sim, experience_sim, rating):
         normalized_rating = (rating / 5.0) if rating else 0.0
@@ -87,7 +99,6 @@ class RankingService:
         for consultant in consultants:
             comp_sim, exp_sim = self.compute_similarities(consultant, need_embedding)
             score = self.compute_score(comp_sim, exp_sim, consultant.rating)
-            # risk = self.assess_risk(comp_sim, exp_sim, staffing_need.urgency_level)
 
             results.append({
                 "consultant": consultant,

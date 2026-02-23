@@ -5,6 +5,7 @@ from intelliplanApi.api.recommend import recommend_router
 from intelliplanApi.api.chat import chat_router
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
+import os
 load_dotenv()
 
 @asynccontextmanager
@@ -16,7 +17,7 @@ app = FastAPI(lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[os.getenv("FRONTEND_ORIGIN")],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

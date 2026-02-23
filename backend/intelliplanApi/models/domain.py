@@ -1,4 +1,5 @@
 from typing import List, Dict, Literal
+from numpy import ndarray
 from pydantic import BaseModel
 from datetime import date, time
 
@@ -11,7 +12,7 @@ class Availability(BaseModel):
 
 class Consultant(BaseModel):
     id: str
-    competences: List[str] 
+    competences: List[str]
     availability: Availability
     customer_experience: List[str] 
     rating: float | None = None
