@@ -1,7 +1,7 @@
 "use client";
-import Sidebar from "@/components/sidebar";
+import Sidebar from "@/components/sidebar/sidebar";
 import { Bell, Check } from "lucide-react";
-import SidebarNav from "@/components/sidebar-nav";
+import SidebarNav from "@/components/sidebar/sidebar-nav";
 import { TCustomer } from "@/types";
 
 const customer: TCustomer = {
@@ -13,7 +13,6 @@ const customer: TCustomer = {
     preferredConsultants: ["Hanna", "Kevin"],
   },
 };
-// const johan = customers.find(customer => customer.id === 1);
 
 export default function DashboardPage() {
   return (

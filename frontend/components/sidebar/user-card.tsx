@@ -1,7 +1,7 @@
 "use client";
 
 import { Users } from "lucide-react";
-import type { TUser } from "../types";
+import type { TUser } from "../../types";
 
 export default function UserCard({ user }: { user: TUser }) {
 

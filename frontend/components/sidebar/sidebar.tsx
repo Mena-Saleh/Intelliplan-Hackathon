@@ -1,6 +1,6 @@
 "use client";
 
-import type { TUser } from "../types";
+import type { TUser } from "../../types";
 import Logo from "./logo";
 import UserCard from "./user-card";
 

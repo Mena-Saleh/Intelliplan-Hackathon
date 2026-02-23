@@ -1,12 +1,12 @@
 "use client";
 
-import Sidebar from "@/components/sidebar";
-import SidebarRequests from "@/components/sidebar-requests";
-import ChatWelcome from "@/components/chat-welcome";
-import ChatInput from "@/components/chat-input";
+import Sidebar from "@/components/sidebar/sidebar";
+import SidebarRequests from "@/components/sidebar/sidebar-requests";
+import ChatWelcome from "@/components/chat/chat-welcome";
+import ChatInput from "@/components/chat/chat-input";
 import { customers } from "@/data/mock-customer-data";
 import { useChat } from "@/hooks/use-chat";
-import ChatMessages from "@/components/chat-messages";
+import ChatMessages from "@/components/chat/chat-messages";
 
 export default function ChatPage() {
   const {

@@ -1,6 +1,6 @@
 "use client";
 import { MessageSquare } from "lucide-react";
-import RequestButton from "./request-button";
+import RequestButton from "../common/request-button";
 
 interface TProps {
   onNewChat: () => void;

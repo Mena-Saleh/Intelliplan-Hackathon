@@ -1,7 +1,7 @@
 "use client";
 
-import Sidebar from "@/components/sidebar";
-import SidebarNav from "@/components/sidebar-nav";
+import Sidebar from "@/components/sidebar/sidebar";
+import SidebarNav from "@/components/sidebar/sidebar-nav";
 import { Star } from "lucide-react";
 
 export default function ConsultantWorkHistoryPage() {

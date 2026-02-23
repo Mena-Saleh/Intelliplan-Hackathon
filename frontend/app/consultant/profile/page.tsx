@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "@/components/sidebar";
-import SidebarNav from "@/components/sidebar-nav";
+import Sidebar from "@/components/sidebar/sidebar";
+import SidebarNav from "@/components/sidebar/sidebar-nav";
 import { User, MapPin, Calendar, Clock, Plus, Check, X } from "lucide-react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";

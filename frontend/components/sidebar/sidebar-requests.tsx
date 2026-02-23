@@ -2,7 +2,7 @@
 
 import { Clock, MessageSquare } from "lucide-react";
 import type { TChat } from "@/types/chat";
-import RequestButton from "./request-button";
+import RequestButton from "../common/request-button";
 import { formatDate } from "@/utils/format-date";
 
 type TProps = {
