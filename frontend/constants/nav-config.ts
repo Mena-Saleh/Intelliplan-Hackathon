@@ -2,12 +2,12 @@ import { Clock, LayoutDashboard, MessageSquare } from "lucide-react";
 
 export const navConfig = {
     manager: [
-        { name: "Dashboard", href: "/manager/dashboard", icon: LayoutDashboard },
+        { name: "Dashboard", href: "/manager", icon: LayoutDashboard },
     ],
     consultant: [
         {
             name: "Dashboard",
-            href: "/consultant/dashboard",
+            href: "/consultant",
             icon: LayoutDashboard,
         },
         {

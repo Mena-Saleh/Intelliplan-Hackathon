@@ -7,10 +7,7 @@ import StatsRow from "@/components/manager/stats-row";
 import RequestList from "@/components/manager/request-list";
 import ConsultantCard from "@/components/manager/consultant-card";
 import { Users, Activity, CheckCircle } from "lucide-react";
-import {
-  MOCK_REQUESTS,
-  MOCK_CONSULTANTS,
-} from "@/data/mock-manager-dashboard-data";
+import { MOCK_REQUESTS, MOCK_CONSULTANTS } from "@/data/mock-manager-data";
 import type { TRequest } from "@/types/manager";
 
 export default function DashboardPage() {
