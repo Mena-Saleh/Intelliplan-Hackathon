@@ -1,7 +1,7 @@
 "use client";
 
-import Sidebar from "@/src/components/sidebar";
-import SidebarNav from "@/src/components/sidebar-nav";
+import Sidebar from "@/components/sidebar";
+import SidebarNav from "@/components/sidebar-nav";
 import { Clock, Star, CheckCircle, XCircle } from "lucide-react";
 
 export default function ConsultantDashboardPage() {

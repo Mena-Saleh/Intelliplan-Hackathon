@@ -1,9 +1,9 @@
 "use client";
 
 import { Clock, MessageSquare } from "lucide-react";
-import type { TChat } from "@/src/types/chat";
+import type { TChat } from "@/types/chat";
 import RequestButton from "./request-button";
-import { formatDate } from "@/src/utils/format-date";
+import { formatDate } from "@/utils/format-date";
 
 type TProps = {
   activeChatId?: string | null;

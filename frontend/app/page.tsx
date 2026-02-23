@@ -1,8 +1,8 @@
 "use client";
-import Sidebar from "@/src/components/sidebar";
+import Sidebar from "@/components/sidebar";
 import { Bell, Check } from "lucide-react";
-import SidebarNav from "@/src/components/sidebar-nav";
-import { TCustomer } from "@/src/types";
+import SidebarNav from "@/components/sidebar-nav";
+import { TCustomer } from "@/types";
 
 const customer: TCustomer = {
   id: 1,

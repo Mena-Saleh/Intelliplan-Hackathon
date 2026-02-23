@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "@/src/components/sidebar";
+import Sidebar from "@/components/sidebar";
 import {
   Clock,
   CheckCircle,
@@ -15,7 +15,7 @@ import {
   ShieldAlert,
   ShieldCheck,
 } from "lucide-react";
-import SidebarNav from "@/src/components/sidebar-nav";
+import SidebarNav from "@/components/sidebar-nav";
 
 type Status = "pending" | "approved" | "rejected" | "bypassed";
 

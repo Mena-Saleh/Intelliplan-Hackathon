@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { navConfig } from "@/src/constants/nav-config";
+import { navConfig } from "@/constants/nav-config";
 
 interface TProps {
   variant: "manager" | "consultant" | "customer";

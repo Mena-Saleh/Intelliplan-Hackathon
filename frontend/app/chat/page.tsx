@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "@/src/components/sidebar";
-import type { Chat } from "@/src/types/chat";
-import ChatWelcome from "@/src/components/chat-welcome";
-import ChatInput from "@/src/components/chat-input";
-import SidebarRequests from "@/src/components/sidebar-requests";
-import { customers } from "@/src/data/mock-customer-data";
-import { fastApiService } from "@/src/services/fast-api-service";
-import { getMockupDisplayName } from "@/src/utils/get-mockup-display-name";
+import Sidebar from "@/components/sidebar";
+import type { Chat } from "@/types/chat";
+import ChatWelcome from "@/components/chat-welcome";
+import ChatInput from "@/components/chat-input";
+import SidebarRequests from "@/components/sidebar-requests";
+import { customers } from "@/data/mock-customer-data";
+import { fastApiService } from "@/services/fast-api-service";
+import { getMockupDisplayName } from "@/utils/get-mockup-display-name";
 import { Star } from "lucide-react";
 import { useRef, useEffect } from "react";
 
