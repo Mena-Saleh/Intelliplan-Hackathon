@@ -1,4 +1,5 @@
 export type TUrgencyLevel = "low" | "medium" | "high"
+export type TRiskLevel = "LOW" | "MEDIUM" | "HIGH";
 
 export interface TStaffingNeed {
     id: string
@@ -28,7 +29,7 @@ export interface TConsultant {
 export interface TRankedConsultant {
     id: string
     rating: number | null
-    risk_level: string
+    risk_level: TRiskLevel
     risk_reason: string
     consultant: TConsultant
 }

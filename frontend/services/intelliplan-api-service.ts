@@ -4,14 +4,14 @@ import {
     TRecommendResponse,
     TChatRequest,
     TChatResponse,
-} from "../types/api"
+} from "../types/intelliplan-api"
 
-class FastApiService {
+class IntelliplanApiService {
     private api: AxiosInstance
 
     constructor() {
         this.api = axios.create({
-            baseURL: "http://127.0.0.1:8000",
+            baseURL: process.env.NEXT_PUBLIC_INTELLIPLAN_API_BASE_URL || "http://localhost:8000",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -35,4 +35,4 @@ class FastApiService {
     }
 }
 
-export const fastApiService = new FastApiService()
+export const intelliplanApiService = new IntelliplanApiService()

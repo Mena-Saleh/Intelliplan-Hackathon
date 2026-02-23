@@ -2,7 +2,7 @@ export type TRiskLevel = "LOW" | "MEDIUM" | "HIGH";
 
 export type TMatchCandidate = {
     id: string;
-    name: string;
+    name?: string;
     rating?: number | null;
     risk: TRiskLevel;
     riskReason: string;
