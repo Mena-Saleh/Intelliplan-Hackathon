@@ -9,10 +9,11 @@ Top 5 Finalist – Kolomolo AI Business Value 2026 Hackathon (AWS Stockholm)
 1. Introduction & Problem Definition
 2. Technical Problem & Proposed Approach
 3. Results
-4. Prerequisites
-5. How to Run
-6. Architecture Overview
-7. Credits & Licensing
+4. Short Demo
+5. Prerequisites
+6. How to Run
+7. Architecture Overview
+8. Credits & Licensing
 
 ---
 
@@ -181,7 +182,15 @@ Disadvantages:
 
 ---
 
-# 4. Prerequisites
+# 4. Short Demo
+
+Here is a quick demo of the final app in action!
+
+![Demo](docs/Demo.gif)
+
+---
+
+# 5. Prerequisites
 
 Make sure you have:
 
@@ -190,7 +199,7 @@ Make sure you have:
 
 ---
 
-# 5. How to Run
+# 6. How to Run
 
 ## 1. Environment Variables
 
@@ -233,7 +242,7 @@ Everything should now be running locally.
 
 ---
 
-# 6. Architecture Overview
+# 7. Architecture Overview
 
 Backend:
 
@@ -251,7 +260,7 @@ Frontend:
 
 ---
 
-# 7. Credits & Licensing
+# 8. Credits & Licensing
 
 ## Idea Ownership
 
