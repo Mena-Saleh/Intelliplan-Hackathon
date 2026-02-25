@@ -1,14 +1,16 @@
 from sentence_transformers import SentenceTransformer
 import numpy as np
+import torch
 
 class EmbeddingService:
     
     def __init__(self):
         self.model: SentenceTransformer | None = None
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
     
     def load_model(self):
         if self.model is None:
-            self.model = SentenceTransformer("BAAI/bge-large-en-v1.5")
+            self.model = SentenceTransformer("BAAI/bge-large-en-v1.5", device=self.device)
 
     def embed(self, text: str) -> np.ndarray:
         if self.model is None:
